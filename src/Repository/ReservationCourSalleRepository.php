@@ -73,4 +73,21 @@ class ReservationCourSalleRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function list_Par_Salle($id){
+        return $this->createQueryBuilder('r')
+            ->where('r.idSalle=:id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+
+    }
+    public function list_Par_Cour($id){
+        return $this->createQueryBuilder('r')
+            ->where('r.idCour=:id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+
+    }
 }

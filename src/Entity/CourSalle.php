@@ -6,7 +6,7 @@ use App\Repository\CourSalleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=CourSalleRepository::class)
  */
@@ -21,6 +21,7 @@ class CourSalle
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="Nom ne peut pas etre vide")
      */
     private $nomCour;
 
@@ -36,16 +37,21 @@ class CourSalle
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull(message="Nombre de participant ne peut pas etre vide")
+     * @Assert\GreaterThan(0,message="Date doit etre superieure a zero")
      */
     private $nbrTotal;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotNull
+     * @Assert\GreaterThan("today",message="Date doit etre superieure a celle d'aujourdhui")
      */
     private $date;
 
     /**
      * @ORM\Column(type="time")
+     * @Assert\NotNull
      */
     private $tCour;
 

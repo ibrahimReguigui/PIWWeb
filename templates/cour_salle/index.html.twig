@@ -1,13 +1,9 @@
 {% extends 'base-back.html.twig' %}
 {% block pagetitle %}CourSalle index{% endblock%}
 {% block title %}CourSalle index{% endblock %}
-
+{% block titreDroite %}Salle4{% endblock %}
 {% block body %}
-<div class="container rounded bg-white mt-5 mb-5" background-color="white">
-    <div class="row">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3" background-color="white">
-                </div>
+
  <table class="table table-bordered">
         <thead class="thead-dark">
             <tr>
@@ -47,7 +43,5 @@
     <a href="{{ path('app_cour_salle_new') }}">Create new</a>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
+
 {% endblock %}

@@ -1,7 +1,7 @@
-{% extends 'front/fresh-base.html.twig' %}
+{% extends 'base-front.html.twig' %}
 
-{% block title %}ReservationCourSalle{% endblock %}
 
+{% block pagetitle %}ReservationCourSalle{% endblock %}
 {% block body %}
     <h1>ReservationCourSalle</h1>
 
@@ -14,7 +14,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_reservation_cour_salle_index') }}">back to list</a>
+    <a href="{{ path('app_liste_reservation_cour_salle_index') }}">back to list</a>
 
     <a href="{{ path('app_reservation_cour_salle_edit', {'id': reservation_cour_salle.id}) }}">edit</a>
 

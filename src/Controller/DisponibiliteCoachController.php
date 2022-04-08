@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/coach/disponibilite")
+ * @Route("/coach/reservation")
  */
 class DisponibiliteCoachController extends AbstractController
 {

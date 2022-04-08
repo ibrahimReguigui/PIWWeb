@@ -11,7 +11,12 @@
         <ul>
             <li><a >Home</a></li>
             <li><a >About Us</a></li>
-            <li><a >Classes</a></li>
+            <li><a href="#">Cour</a>
+                <ul class="dropdown">
+                    <li><a href="{{ path('app_liste_cour_salle') }}">Liste Cour</a></li>
+                    <li><a href="{{ path('app_liste_reservation_cour_salle_index') }}">Mon Planning</a></li>
+                </ul>
+            </li>
             <li><a >Services</a></li>
             <li><a >Our Team</a></li>
             <li><a href="#">Pages</a>
@@ -65,7 +70,12 @@
                     <ul>
                         <li class="active"><a href="">Home</a></li>
                         <li><a href="">About Us</a></li>
-                        <li><a href="">Classes</a></li>
+                        <li><a href="#">Cour</a>
+                            <ul class="dropdown">
+                                <li><a href="{{ path('app_liste_cour_salle') }}">Liste Cour</a></li>
+                                <li><a href="{{ path('app_liste_reservation_cour_salle_index') }}">Mon Planning</a></li>
+                            </ul>
+                        </li>
                         <li><a href="">Services</a></li>
 
                         <li><a href="">Our Team</a></li>
@@ -87,11 +97,8 @@
             <div class="col-lg-3">
                 <div class="top-option">
                     <div class="to-social">
-
-
                             <a href="">Sign in </a>
                             <a href="">Sign up </a>
-
                     </div>
                 </div>
             </div>

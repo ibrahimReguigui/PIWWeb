@@ -25,7 +25,7 @@ class Utilisateur
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity=CourSalle::class, mappedBy="Utilisateur", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=CourSalle::class, mappedBy="Utilisateur")
      */
     private $courSalles;
 

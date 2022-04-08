@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\ReservationCourSalle;
 use App\Entity\Utilisateur;
 use App\Form\ReservationCourSalleType;
+use App\Repository\CourSalleRepository;
 use App\Repository\ReservationCourSalleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,39 +13,53 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/salle/reservationcour")
+ * @Route("/sportif")
  */
 class ReservationCourSalleController extends AbstractController
 {
     /**
-     * @Route("/", name="app_reservation_cour_salle_index", methods={"GET"})
+     * @Route("/listeReservation", name="app_liste_reservation_cour_salle_index", methods={"GET"})
      */
     public function index(ReservationCourSalleRepository $reservationCourSalleRepository): Response
     {
         return $this->render('reservation_cour_salle/index.html.twig', [
-            'reservation_cour_salles' => $reservationCourSalleRepository->findAll(),
+            'reservation_cour_salles' => $reservationCourSalleRepository->findBy(['idSportif'=>'6']),
         ]);
     }
 
     /**
-     * @Route("/new", name="app_reservation_cour_salle_new", methods={"GET", "POST"})
+     * @Route("/listeReservation/reserver/{idCour}/{idSalle}", name="app_reserver_cour_salle_index", methods={"GET"})
      */
-    public function new(Request $request, ReservationCourSalleRepository $reservationCourSalleRepository): Response
-    {$em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(Utilisateur::class)->find(5);
-        $reservationCourSalle = new ReservationCourSalle();
-        $form = $this->createForm(ReservationCourSalleType::class, $reservationCourSalle);
-        $reservationCourSalle->setIdSportif($user);
-        $form->handleRequest($request);
+    public function reserver($idCour,$idSalle,CourSalleRepository $courSalleRepository): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(Utilisateur::class)->find(6);
+        $reservation = new ReservationCourSalle();
+        $cour=$courSalleRepository->find($idCour);
+        $cour->setNbrActuel(($cour->getNbrActuel())+1);
+        $em->persist($cour);
+        $em->flush();
+        $salle=  $em->getRepository(Utilisateur::class)->find($idSalle);
+        $reservation->setIdSportif($user);
+        $reservation->setIdCour($cour);
+        $reservation->setIdSalle($salle);
+        $em->persist($reservation);
+        $em->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $reservationCourSalleRepository->add($reservationCourSalle);
-            return $this->redirectToRoute('app_reservation_cour_salle_index', [], Response::HTTP_SEE_OTHER);
-        }
 
-        return $this->render('reservation_cour_salle/new.html.twig', [
-            'reservation_cour_salle' => $reservationCourSalle,
-            'form' => $form->createView(),
+        return $this->redirectToRoute('app_liste_reservation_cour_salle_index');
+    }
+
+
+
+
+    /**
+     * @Route("/listeCour", name="app_liste_cour_salle")
+     */
+    public function listeCour( CourSalleRepository $courSalleRepository): Response
+    {
+        return $this->render('reservation_cour_salle/liste_cour.html.twig', [
+            'cour_salles' => $courSalleRepository->findAll(),
         ]);
     }
 
@@ -68,7 +83,7 @@ class ReservationCourSalleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $reservationCourSalleRepository->add($reservationCourSalle);
-            return $this->redirectToRoute('app_reservation_cour_salle_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_liste_reservation_cour_salle_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('reservation_cour_salle/edit.html.twig', [
@@ -86,6 +101,6 @@ class ReservationCourSalleController extends AbstractController
             $reservationCourSalleRepository->remove($reservationCourSalle);
         }
 
-        return $this->redirectToRoute('app_reservation_cour_salle_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_liste_reservation_cour_salle_index', [], Response::HTTP_SEE_OTHER);
     }
 }

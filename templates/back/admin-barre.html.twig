@@ -39,11 +39,13 @@
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Lessons</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Cour</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-th"></i><a href=" ">New Lessons</a></li>
-
+                        <li><i class="menu-icon fa fa-th"></i><a href="{{ path('app_cour_salle_index') }} ">Liste Cour</a></li>
+                        <li><i class="menu-icon fa fa-th"></i><a href="{{ path('app_cour_salle_new') }} ">Ajouter Cour</a></li>
+                        <li><i class="menu-icon fa fa-th"></i><a href="{{ path('app_list_reservation_cour_salle_index') }} ">Liste Reservation</a></li>
                     </ul>
+
                 </li>
                 </li>
                 <li class="menu-item-has-children dropdown">

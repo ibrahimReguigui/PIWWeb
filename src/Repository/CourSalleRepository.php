@@ -73,4 +73,15 @@ class CourSalleRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findBySalle($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.Utilisateur = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
