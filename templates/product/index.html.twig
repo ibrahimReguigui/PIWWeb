@@ -1,0 +1,45 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+    <h1>Products</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>ProdId</th>
+            <th>ExpireDate</th>
+            <th>ProdName</th>
+            <th>Price</th>
+            <th>ProdQte</th>
+            <th>ProdType</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td><img src="{{asset('images/Product Images/') ~ product.urlImg}}" width="100" height="100"></td>{# ../../public/images/Product Images/{{ product.urlImg }} #}
+                <td>{{ product.prodId }}</td>
+                <td>{{ product.expireDate ? product.expireDate|date('Y-m-d') : '' }}</td>
+                <td>{{ product.prodName }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.prodQte }}</td>
+                <td>{{ product.prodType }}</td>
+                <td>
+                    <button type="button" class="btn btn-primary"><a style="color:#FFFFFF;" href="{{ path('product_show', {'id': product.id}) }}">show</a></button>
+                    <button type="button" class="btn btn-info"><a style="color:#FFFFFF;" href="{{ path('product_edit', {'id': product.id}) }}">edit</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <button type="button" class="btn btn-success"><a style="color:#FFFFFF;" href="{{ path('product_new') }}">Create new</a></button>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}New DisponibiliteCoach{% endblock %}
+
+{% block body %}
+    <h1>Create new DisponibiliteCoach</h1>
+
+    {{ include('disponibilite_coach/_form.html.twig') }}
+
+    <a href="{{ path('app_disponibilite_coach_index') }}">back to list</a>
+{% endblock %}

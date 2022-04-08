@@ -1,0 +1,53 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <h1>User index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+           
+                <th>Name</th>
+                <th>Lastname</th>
+                <th>Tel</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <form role="search" class="sr-input-func">
+            <input type="text" placeholder="Search..." class="search-int form-control" name="search">
+            <a href="#"><i class="fa fa-search"></i></a>
+        </form>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+
+                <td>{{ user.name }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.tel }}</td>
+                <td>
+                    <a href="{{ path('user_panel_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('user_panel_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        <div class="navigation">
+            {{ knp_pagination_render(users) }}
+        </div>
+        </tbody>
+
+    </table>
+
+    <a href="{{ path('user_panel_new') }}">Create new</a>
+{% endblock %}

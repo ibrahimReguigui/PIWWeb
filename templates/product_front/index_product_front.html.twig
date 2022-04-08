@@ -1,0 +1,57 @@
+{% extends 'front/fresh-base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+
+    <div class="col-xl-9 col-lg-10 col-sm-8 col-7">
+
+        <ul class="navbar-nav flex-row justify-content-end flex-wrap align-items-center mr-lg-4 mr-xl-0">
+
+            <li class="nav-item px-3 text-uppercase mb-0 position-relative d-lg-flex">
+                <div id="cart" class="d-none">
+
+                </div>
+                <a href="" class="cart position-relative d-inline-flex" aria-label="View your shopping cart">
+                    <i class="fas fa fa-shopping-cart fa-lg" style="color: #ff9f1a"></i>
+                    <span class="cart-basket d-flex align-items-center justify-content-center"  style="color: #ff9f1a">
+            0
+          </span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+    <section class="classes-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <span>Welcome To Our Shop</span>
+                        <h2>Our Products</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for product in products %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="class-item">
+                        <div class="ci-pic">
+                            <img src="{{asset('images/Product Images/') ~ product.urlImg}}" alt="">
+                        </div>
+                        <div class="ci-text">
+                            <span>{{ product.prodType }}</span>
+                            <h5>{{ product.prodName }}</h5>
+                            <h3 style="color: white">{{ product.price }} DT</h3>
+                            <a href="{{ path('product_show_front', {'id': product.id}) }}"><i class="fa fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

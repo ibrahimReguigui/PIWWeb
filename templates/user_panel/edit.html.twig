@@ -1,0 +1,47 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}Manage your profile{% endblock %}
+
+{% block body %}
+
+
+    <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="{{ asset('images/user/') ~user.urlImg }}"><span class="font-weight-bold"></span>{{ user.name }}<span class="text-black-50">{{ user.email }}</span><span></span></div>
+            </div>
+            <div class="col-md-5 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Manage user</h4>
+                    </div>
+                    {{ form_start(registrationForm, {'attr':{'novalidate':'novalidate'}}) }}
+                    {{ form_row(registrationForm.name,{'value': user.name})  }}
+                    {{ form_row(registrationForm.lastname,{'value': user.lastname})  }}
+                    {{ form_row(registrationForm.tel,{'value': user.tel})  }}
+                    {{ form_row(registrationForm.email,{'value': user.email}) }}
+                    {{ form_row(registrationForm.urlImg,{'attr': {'class': 'form-control col-md-3'}}) }}
+                    {{ form_row(registrationForm.status,{'value': user.status}) }}
+
+                    <div>
+
+                        <div class="mt-5 text-center"><button  type="submit" class="btn btn-primary profile-button">Save</button></div>
+                        {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
