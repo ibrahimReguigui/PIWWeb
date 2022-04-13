@@ -1,0 +1,30 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}DisponibiliteCoach{% endblock %}
+
+{% block body %}
+    <h1>DisponibiliteCoach</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ disponibilite_coach.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ disponibilite_coach.date ? disponibilite_coach.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Time</th>
+                <td>{{ disponibilite_coach.time ? disponibilite_coach.time|date('H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_disponibilite_coach_index') }}">back to list</a>
+
+    <a href="{{ path('app_disponibilite_coach_edit', {'id': disponibilite_coach.id}) }}">edit</a>
+
+    {{ include('disponibilite_coach/_delete_form.html.twig') }}
+{% endblock %}

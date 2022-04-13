@@ -1,0 +1,11 @@
+{% extends 'front/fresh-base.html.twig' %}
+
+{% block title %}New ReservationCourSalle{% endblock %}
+
+{% block body %}
+    <h1>Create new ReservationCourSalle</h1>
+
+    {{ include('reservation_cour_salle/_form.html.twig') }}
+
+    <a href="{{ path('app_reservation_cour_salle_index') }}">back to list</a>
+{% endblock %}
