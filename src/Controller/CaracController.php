@@ -3,28 +3,32 @@
 namespace App\Controller;
 
 use App\Entity\Caracteristiquesportif;
-use App\Entity\CourSalle;
+
 use App\Entity\Utilisateur;
+use App\Form\CaracType;
 use App\Form\CourSalleType;
+use App\Repository\CaracteristiquesportifRepository;
 use App\Repository\CourSalleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class CaracController extends AbstractController
 {
     /**
      * @Route("/carac", name="app_carac")
      */
-    public function index(): Response
+    public function index(CaracteristiquesportifRepository $csr): Response
     {
         return $this->render('carac/index.html.twig', [
-            'controller_name' => 'CaracController',
+            'caracs' => $csr->findById(3),
         ]);
-    }
 
+    }
+//Ajouter
     /**
-     * @Route("/addCarac", name="addPlat")
+     * @Route("/addCarac", name="addCarac")
      */
     public function addCarac(Request $request): Response
     {
@@ -36,12 +40,53 @@ class CaracController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $cs ->setBesoinCalories(1);
             $em->persist($cs);
+
             $em->flush();
 
             return $this->redirectToRoute('app_carac');
         }
-        return $this->render('plat/createCarac.html.twig',['f'=>$form->createView()]);
+        return $this->render('carac/create.html.twig',['f'=>$form->createView()]);
+
+    }
+//delete
+    /**
+     * @Route("/removeBlog/{id}", name="supp_blog")
+     */
+    public function suppressionBlog(Caracteristiquesportif  $cs): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($cs);
+        $em->flush();
+
+        return $this->redirectToRoute('display_blog');
+
+
+    }
+
+//update
+    /**
+     * @Route("/modifC/{id}", name="modifCa")
+     */
+    public function modifC(Caracteristiquesportif $cs,$id): Response
+    {
+        $cs = $this->getDoctrine()->getManager()->getRepository(Caracteristiquesportif::class)->find($id);
+
+        $form = $this->createForm(CaracType::class,$cs);
+
+        $form->handleRequest($cs);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute('app_carac');
+        }
+        return $this->render('carac/updateCarac.html.twig',['f'=>$form->createView()]);
+
+
+
 
     }
 

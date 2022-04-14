@@ -1,20 +1,51 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/fresh-base.html.twig' %}
 
 {% block title %}Hello CaracController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>ReservationCoach index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Votre Taille</th>
+            <th>Votre Poid</th>
+            <th>Votre Age</th>
+            <th>Votre Objectif</th>
+            <th>Votre Bmi</th>
+            <th>Besoin protein</th>
+            <th>Besoin carb</th>
+            <th>Besoin calories</th>
+            <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for c in caracs %}
+            <tr>
+                <td>{{ c.tailleSportif }}</td>
+                <td>{{ c.poidSportif }}</td>
+                <td>{{ c.ageSportif }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/HP/Documents/GitHub/PIWWeb/src/Controller/CaracController.php'|file_link(0) }}">src/Controller/CaracController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/HP/Documents/GitHub/PIWWeb/templates/carac/index.html.twig'|file_link(0) }}">templates/carac/index.html.twig</a></code></li>
-    </ul>
-</div>
+                <td>
+
+
+                    <a href="{{ path('modifCa', {'id': c.id}) }}">edit</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_coach_new') }}">Create new</a>
 {% endblock %}

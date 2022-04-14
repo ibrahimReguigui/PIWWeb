@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class CaracType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -16,7 +16,13 @@ class CaracType extends AbstractType
             ->add('tailleSportif')
             ->add('poidSportif')
             ->add('ageSportif')
-            ->add('sexe')
+            ->add('sexe', ChoiceType::class,[
+                'choices'=>[
+                    'Homme'=>"Homme",
+                    'Femme'=>"Femme",
+                ],
+            ])
+
             ->add('objectifNutrition')
             ->add('ajouter', SubmitType::class)
 

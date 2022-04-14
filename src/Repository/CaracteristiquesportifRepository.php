@@ -45,6 +45,32 @@ class CaracteristiquesportifRepository extends ServiceEntityRepository
         }
     }
 
+
+
+
+
+    /**
+     * @return Caracteristiquesportif[] Returns an array of Publication objects
+     */
+
+    public function findById($id)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.id = :val')
+            ->setParameter('val', $id)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
+
+
+
+
+
+
     // /**
     //  * @return Caracteristiquesportif[] Returns an array of Caracteristiquesportif objects
     //  */
