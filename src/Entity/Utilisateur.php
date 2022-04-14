@@ -64,6 +64,11 @@ class Utilisateur
      */
     private $whoami;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Caracteristiquesportif::class, mappedBy="idSportif", cascade={"persist", "remove"})
+     */
+    private $caracteristiquesportif;
+
 
     public function __construct()
     {
@@ -313,6 +318,28 @@ class Utilisateur
     public function setWhoami(string $whoami): self
     {
         $this->whoami = $whoami;
+
+        return $this;
+    }
+
+    public function getCaracteristiquesportif(): ?Caracteristiquesportif
+    {
+        return $this->caracteristiquesportif;
+    }
+
+    public function setCaracteristiquesportif(?Caracteristiquesportif $caracteristiquesportif): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($caracteristiquesportif === null && $this->caracteristiquesportif !== null) {
+            $this->caracteristiquesportif->setIdSportif(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($caracteristiquesportif !== null && $caracteristiquesportif->getIdSportif() !== $this) {
+            $caracteristiquesportif->setIdSportif($this);
+        }
+
+        $this->caracteristiquesportif = $caracteristiquesportif;
 
         return $this;
     }
