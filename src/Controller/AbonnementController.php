@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/salle/abonnement")
  */
-class AbonnementController extends AbstractController
+class AbonnementController extends AbstractController  //
 {
     /**
      * @Route("/", name="app_abonnement_index", methods={"GET"})
