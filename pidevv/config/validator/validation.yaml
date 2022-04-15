@@ -1,0 +1,4 @@
+App\Entity\Event:
+  properties:
+    img:
+      - File: ~
