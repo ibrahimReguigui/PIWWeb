@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\DisponibiliteCoachRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=DisponibiliteCoachRepository::class)
  */
@@ -25,11 +25,13 @@ class DisponibiliteCoach
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\GreaterThan("today",message="Date doit etre superieure a celle d'aujourdhui")
      */
     private $date;
 
     /**
      * @ORM\Column(type="time")
+     * @Assert\NotNull
      */
     private $time;
 

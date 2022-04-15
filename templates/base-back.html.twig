@@ -191,6 +191,16 @@
     </div>
 
     <div class="content mt-3">
+        {% for message in app.flashes('failure') %}
+            <div class="alert alert-success" style="background-color:#b2c2bf;text-align: center">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success" style="text-align: center">
+                {{ message }}
+            </div>
+        {% endfor %}
         {% block body %}
 
         <div class="col-sm-12">

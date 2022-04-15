@@ -2,14 +2,14 @@
 
 
 {% block pagetitle %}Mon Planning{% endblock %}
-{% block pagetitle1 %}Cour{% endblock %}
+{% block pagetitle1 %}Cours{% endblock %}
 {% block pagetitle2 %}Mon Planning{% endblock %}
 {% block body %}
 
-    <table class="table table-bordered">
+    <table class="table table-bordered bg-white mt-5 mb-5">
         <thead class="thead-dark">
         <tr>
-            <th>Id</th>
+
             <th>NomSalle</th>
             <th>NomCour</th>
             <th>Information</th>
@@ -23,7 +23,7 @@
         <tbody>
         {% for reservation_cour_salle in reservation_cour_salles %}
             <tr>
-                <td>{{ reservation_cour_salle.id }}</td>
+
                 <td>{{ reservation_cour_salle.idSalle.nom }}</td>
                 <td>{{ reservation_cour_salle.idCour.nomCour }}</td>
                 <td>{{ reservation_cour_salle.idCour.information }}</td>

@@ -88,6 +88,14 @@ class ReservationCourSalleRepository extends ServiceEntityRepository
             ->setParameter('id', $id)
             ->getQuery()
             ->getResult();
-
+    }
+    public function verifierReservation($idSportif,$idCour){
+        return $this->createQueryBuilder('r')
+            ->where('r.idCour=:idCour')
+            ->andWhere('r.idSportif=:idSportif')
+            ->setParameter('idCour', $idCour)
+            ->setParameter('idSportif', $idSportif)
+            ->getQuery()
+            ->getResult();
     }
 }

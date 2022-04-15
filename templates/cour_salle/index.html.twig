@@ -1,13 +1,12 @@
 {% extends 'base-back.html.twig' %}
-{% block pagetitle %}CourSalle index{% endblock%}
-{% block title %}CourSalle index{% endblock %}
-{% block titreDroite %}Salle4{% endblock %}
+{% block titreGauche %}Salle > Liste Cours{% endblock %}
+{% block titreDroite %}Salle3{% endblock %}
 {% block body %}
 
- <table class="table table-bordered">
+ <table class="table table-bordered bg-white mt-5 mb-5">
         <thead class="thead-dark">
             <tr>
-                <th>Id</th>
+
                 <th>NomCour</th>
                 <th>Information</th>
                 <th>NbrActuel</th>
@@ -20,7 +19,7 @@
         <tbody>
         {% for cour_salle in cour_salles %}
             <tr>
-                <td>{{ cour_salle.id }}</td>
+
                 <td>{{ cour_salle.nomCour }}</td>
                 <td>{{ cour_salle.information }}</td>
                 <td>{{ cour_salle.nbrActuel }}</td>
@@ -28,19 +27,19 @@
                 <td>{{ cour_salle.date ? cour_salle.date|date('Y-m-d') : '' }}</td>
                 <td>{{ cour_salle.tCour ? cour_salle.tCour|date('H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_cour_salle_show', {'id': cour_salle.id}) }}">show</a>
-                    <a href="{{ path('app_cour_salle_edit', {'id': cour_salle.id}) }}">edit</a>
+                    <a href="{{ path('app_cour_salle_show', {'id': cour_salle.id}) }}">Examiner</a>
+                    <a href="{{ path('app_cour_salle_edit', {'id': cour_salle.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Données Inexistantes</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_cour_salle_new') }}">Create new</a>
+
             </div>
         </div>
 

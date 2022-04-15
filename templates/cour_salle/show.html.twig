@@ -1,11 +1,11 @@
 {% extends 'base-back.html.twig' %}
 
-{% block title %}CourSalle{% endblock %}
-{% block titreDroite %}Salle4{% endblock %}
+{% block title %}Salle > Cour > Examiner{% endblock %}
+{% block titreDroite %}Salle3{% endblock %}
 {% block body %}
 
 <h1>Cour</h1>
-    <table class="table bg-white mt-5 mb-5">
+    <table class="table table-bordered bg-white mt-5 mb-5">
         <tbody>
 
             <tr>
@@ -35,23 +35,21 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_cour_salle_index') }}">back to list</a>
 
-    <a href="{{ path('app_cour_salle_edit', {'id': cour_salle.id}) }}">edit</a>
 
     {{ include('cour_salle/_delete_form.html.twig') }}
-    <h1>Liste Participant</h1>
+    <h1>Liste Participants</h1>
     <div style="text-align:center;background-color:white;">
         <table class="table bg-white mt-5 mb-5">
             <tbody>
             <tr class="thead-dark">
-                <th>Numero</th>
-                <th>Paricipant</th>
+
+                <th>Paricipants</th>
 
             </tr>
             {% for r in reservation %}
                 <tr>
-                    <td>{{ r.id }}</td>
+
                     <td>{{ r.idSportif.nom }}</td>
 
                 </tr>

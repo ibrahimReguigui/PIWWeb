@@ -38,7 +38,7 @@ class CourSalle
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotNull(message="Nombre de participant ne peut pas etre vide")
-     * @Assert\GreaterThan(0,message="Date doit etre superieure a zero")
+     * @Assert\GreaterThan(0,message="Nombre doit etre superieure a zero")
      */
     private $nbrTotal;
 
@@ -62,9 +62,11 @@ class CourSalle
     private $Utilisateur;
 
     /**
-     * @ORM\OneToMany(targetEntity=ReservationCourSalle::class, mappedBy="idCour")
+     * @ORM\OneToMany(targetEntity=ReservationCourSalle::class, mappedBy="idCour", orphanRemoval=true)
      */
     private $reservationCourSalleCour;
+
+
 
     public function __construct()
     {

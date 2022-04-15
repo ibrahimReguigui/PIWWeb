@@ -19,11 +19,7 @@ class ReservationCoach
      */
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=ReservationCoach::class, inversedBy="reservationCoaches")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idReservation;
+
 
     /**
      * @ORM\OneToMany(targetEntity=ReservationCoach::class, mappedBy="idReservation")
@@ -41,6 +37,22 @@ class ReservationCoach
      */
     private $etat;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="reservationCoachCoach")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idCoach;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date;
+
+    /**
+     * @ORM\Column(type="time")
+     */
+    private $time;
+
     public function __construct()
     {
         $this->reservationCoaches = new ArrayCollection();
@@ -56,12 +68,7 @@ class ReservationCoach
         return $this->idReservation;
     }
 
-    public function setIdReservation(?self $idReservation): self
-    {
-        $this->idReservation = $idReservation;
 
-        return $this;
-    }
 
     /**
      * @return Collection<int, self>
@@ -113,6 +120,42 @@ class ReservationCoach
     public function setEtat(string $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getIdCoach(): ?Utilisateur
+    {
+        return $this->idCoach;
+    }
+
+    public function setIdCoach(?Utilisateur $idCoach): self
+    {
+        $this->idCoach = $idCoach;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getTime(): ?\DateTimeInterface
+    {
+        return $this->time;
+    }
+
+    public function setTime(\DateTimeInterface $time): self
+    {
+        $this->time = $time;
 
         return $this;
     }

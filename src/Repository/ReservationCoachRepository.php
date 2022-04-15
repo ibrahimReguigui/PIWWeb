@@ -16,6 +16,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ReservationCoachRepository extends ServiceEntityRepository
 {
+    private $findReservation;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, ReservationCoach::class);
@@ -44,7 +46,19 @@ class ReservationCoachRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-
+    public function findReservation($idCoach,$idParticipant,$date,$time)
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.idParticipant =:idParticipant')
+            ->andWhere('r.idCoach =:idCoach')
+            ->andWhere('r.date =:date')
+            ->setParameter('idCoach',$idCoach)
+            ->setParameter('idParticipant',$idParticipant)
+            ->setParameter('date',$date)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return ReservationCoach[] Returns an array of ReservationCoach objects
     //  */
