@@ -1,0 +1,83 @@
+{% extends 'base-back.html.twig' %}
+{% block body %}
+
+    <div style="display: flex;align-items: center;justify-content: center;margin-top: 10px;padding: 50px;
+    box-sizing: content-box;width:35%;border: solid #5B6DCD 10px;margin-left: 150px">
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Ajouter un nouveau produit</h5>
+
+                <!-- General Form Elements -->
+
+                {{ form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+
+                <label for="inputText" class="col-sm-10 col-form-label">Libellé</label>
+                <div class="col-sm-10">
+                    {{ form_widget(form.libelle,{'attr':{'class':'form-control'}}) }}
+
+                </div>
+
+                    <label for="inputText" class="col-sm-10 col-form-label">Marque</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.marque,{'attr':{'class':'form-control'}}) }}
+                    </div>
+
+
+                    <label for="inputNumber" class="col-sm-10 col-form-label">Prix</label>
+                    <div class="col-sm-10" type="file" id="formFile">
+                        {{ form_widget(form.prix,{'attr':{'class':'form-control'}}) }}
+                    </div>
+
+
+
+                    <label for="inputNumber" class="col-sm-10 col-form-label">Image</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="file" id="formFile">
+
+
+                    </div>
+
+
+
+                    <label for="inputPassword" class="col-sm-10 col-form-label">Description</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.description,{'attr':{'class':'form-control'}}) }}
+                    </div>
+
+
+                    <label for="inputPassword" class="col-sm-10 col-form-label">quantité</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.quantite,{'attr':{'class':'form-control'}}) }}
+                    </div>
+
+            <label for="inputText" class="col-sm-10 col-form-label">Disponibilité</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.disponibilite,{'attr':{'class':'form-control'}}) }}
+
+            </div>
+            </div>
+            <label for="inputText" class="col-sm-10 col-form-label">Categorie</label>
+            <div class="col-sm-10">
+                {{ form_widget(form.category,{'attr':{'class':'form-control'}}) }}
+
+            </div>
+
+
+
+<br>
+
+            {{ include('produit/_form.html.twig', {'button_label': 'Ajouter'}) }}
+
+            <i class="ti-arrow-circle-left" style="font-size: 50px"></i>
+            <a  href="{{ path('app_produit_index') }}">back to list</a>
+
+
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+

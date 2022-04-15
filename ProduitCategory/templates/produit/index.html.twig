@@ -1,0 +1,45 @@
+{% extends 'base-back.html.twig' %}
+
+{% block body %}
+
+    <i class="ti-arrow-circle-left" style="font-size: 50px"></i>
+    <h1>Liste des produits</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libelle</th>
+                <th>Marque</th>
+                <th>Prix</th>
+                <th>Description</th>
+                <th>Disponibilite</th>
+                <th>Quantite</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.id }}</td>
+                <td>{{ produit.libelle }}</td>
+                <td>{{ produit.marque }}</td>
+                <td>{{ produit.prix }}</td>
+                <td>{{ produit.description }}</td>
+                <td>{{ produit.disponibilite }}</td>
+                <td>{{ produit.quantite }}</td>
+                <td>
+                    <a class="btn btn-success" href="{{ path('app_produit_edit', {'id': produit.id}) }}">Modifier</a>
+                    <a class="btn btn-danger" href="{{ path('app_produit_delete', {'id': produit.id}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_produit_new') }}">Create new</a>
+{% endblock %}
