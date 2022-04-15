@@ -42,33 +42,33 @@
     </div>
     <nav class="canvas-menu mobile-menu">
         <ul>
-            <li><a href="{{ path('front') }}">Home</a></li>
-            <li><a href="{{ path('about') }}">About Us</a></li>
-            <li><a href="{{ path('classes') }}">Classes</a></li>
-            <li><a href="{{ path('services') }}">Services</a></li>
-            <li><a href="{{ path('team') }}">Our Team</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Classes</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Our Team</a></li>
             <li><a href="#">Pages</a>
                 <ul class="dropdown">
-                    <li><a href="{{ path('about') }}">About us</a></li>
-                    <li><a href="{{ path('classes_timp') }}">Classes timetable</a></li>
-                    <li><a href="{{ path('calcul') }}">Bmi calculate</a></li>
-                    <li><a href="{{ path('team') }}">Our team</a></li>
-                    <li><a href="{{ path('gallery') }}">Gallery</a></li>
-                    <li><a href="{{ path('blog') }}">Our blog</a></li>
-                    <li><a href="{{ path('404') }}">404</a></li>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Classes timetable</a></li>
+                    <li><a href="#">Bmi calculate</a></li>
+                    <li><a href="#">Our team</a></li>
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">Our blog</a></li>
+                    <li><a href="#">404</a></li>
                 </ul>
             </li>
-            <li><a href="{{ path('contact') }}">Contact</a></li>
+            <li><a href="#">Contact</a></li>
 
             {% if(app.user) %}
-                <a href="{{ path('profile') }}">welcome, {{ app.user.name }} {{ app.user.lastname }} </a>
-                <a href="{{ path('app_logout') }}">logout </a>
+                <a href="#">welcome, {{ app.user.name }} {{ app.user.lastname }} </a>
+                <a href="#">logout </a>
                 {% if("ROLE_ADMIN" in app.user.roles) %}
-                    <a href="{{ path('back') }}">manage site </a>
+                    <a href="#">manage site </a>
                 {% endif %}
             {% else %}
-                <a href="{{ path('app_login') }}">Sign in </a>
-                <a href="{{ path('app_register') }}">Sign up </a>
+                <a href="#">Sign in </a>
+                <a href="#">Sign up </a>
             {% endif %}
         </ul>
     </nav>
@@ -89,7 +89,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="logo">
-                    <a href="{{ path('front') }}">
+                    <a href="#">
                         <img src="{{ asset('img/logo.png')}}" alt="">
                     </a>
                 </div>
@@ -97,40 +97,31 @@
             <div class="col-lg-6">
                 <nav class="nav-menu">
                     <ul>
-                        <li class="active"><a href="{{ path('front') }}">Home</a></li>
-                        <li><a href="{{ path('about') }}">About Us</a></li>
-                        <li><a href="{{ path('classes') }}">Classes</a></li>
-                        <li><a href="{{ path('services') }}">Services</a></li>
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Classes</a></li>
+                        <li><a href="#">Services</a></li>
 
-                        <li><a href="{{ path('team') }}">Our Team</a></li>
+                        <li><a href="#">Our Team</a></li>
                         <li><a href="#">Pages</a>
                             <ul class="dropdown">
-                                <li><a href="{{ path('about') }}">About us</a></li>
-                                <li><a href="{{ path('classes_timp') }}">Classes timetable</a></li>
-                                <li><a href="{{ path('calcul') }}">Bmi calculate</a></li>
-                                <li><a href="{{ path('team') }}">Our team</a></li>
-                                <li><a href="{{ path('gallery') }}">Gallery</a></li>
-                                <li><a href="{{ path('blog') }}">Our blog</a></li>
-                                <li><a href="{{ path('404') }}">404</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">Classes timetable</a></li>
+                                <li><a href="#">Bmi calculate</a></li>
+                                <li><a href="#">Our team</a></li>
+                                <li><a href="#">Gallery</a></li>
+                                <li><a href="#">Our blog</a></li>
+                                <li><a href="#">404</a></li>
                             </ul>
                         </li>
-                        <li><a href="{{ path('contact') }}">Contact</a></li>
+                        <li><a href="#">Contact</a></li>
                     </ul>
                 </nav>
             </div>
             <div class="col-lg-3">
                 <div class="top-option">
                     <div class="to-social">
-                        {% if(app.user) %}
-                            <a href="{{ path('profile') }}">welcome, {{ app.user.name }} {{ app.user.lastname }} </a>
-                            <a href="{{ path('app_logout') }}">logout </a>
-                            {% if("ROLE_ADMIN" in app.user.roles) %}
-                                <a href="{{ path('back') }}">manage site </a>
-                            {% endif %}
-                        {% else %}
-                            <a href="{{ path('app_login') }}">Sign in </a>
-                            <a href="{{ path('app_register') }}">Sign up </a>
-                        {% endif %}
+                       
                     </div>
                 </div>
             </div>
@@ -140,39 +131,23 @@
         </div>
     </div>
 </header>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 <!-- Header End -->
 {% endblock %}
+
 <!-- Hero Section Begin -->
-<section class="hero-section">
+
     {% block body %}
-    <div class="hs-slider owl-carousel">
-        <div class="hs-item set-bg" data-setbg="{{ asset('img/hero/hero-1.jpg')}}">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 offset-lg-6">
-                        <div class="hi-text">
-                            <span>Shape your body</span>
-                            <h1>Be <strong>strong</strong> traning hard</h1>
-                            <a href="#" class="primary-btn">Get info</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="hs-item set-bg" data-setbg="{{ asset('img/hero/hero-2.jpg')}}">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 offset-lg-6">
-                        <div class="hi-text">
-                            <span>Shape your body</span>
-                            <h1>Be <strong>strong</strong> traning hard</h1>
-                            <a href="#" class="primary-btn">Get info</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  
+
+
+
     {% endblock %}
 </section>
 <!-- Hero Section End -->

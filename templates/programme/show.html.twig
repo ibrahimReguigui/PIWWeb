@@ -1,0 +1,38 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Programme{% endblock %}
+
+{% block body %}
+    <h1>Programme</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ programme.id }}</td>
+            </tr>
+            <tr>
+                <th>NomProgramme</th>
+                <td>{{ programme.nomProgramme }}</td>
+            </tr>
+            <tr>
+                <th>ObjectifProgramme</th>
+                <td>{{ programme.objectifProgramme }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionProgramme</th>
+                <td>{{ programme.descriptionProgramme }}</td>
+            </tr>
+            <tr>
+                <th>CategorieProgramme</th>
+                <td>{{ programme.categorieProgramme }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_programme_index') }}">back to list</a>
+
+    <a href="{{ path('app_programme_edit', {'id': programme.id}) }}">edit</a>
+
+    {{ include('programme/_delete_form.html.twig') }}
+{% endblock %}

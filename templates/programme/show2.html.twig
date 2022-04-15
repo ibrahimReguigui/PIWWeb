@@ -1,0 +1,54 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Programme{% endblock %}
+
+{% block body %}
+    <h1>Programme</h1>
+
+    <table class="table">
+        <tbody>
+     
+            <tr>
+                <th>NomProgramme</th>
+                <td>{{ programme.nomProgramme }}</td>
+            </tr>
+            <tr>
+                <th>ObjectifProgramme</th>
+                <td>{{ programme.objectifProgramme }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionProgramme</th>
+                <td>{{ programme.descriptionProgramme }}</td>
+            </tr>
+            <tr>
+                <th>CategorieProgramme</th>
+                <td>{{ programme.categorieProgramme }}</td>
+            </tr>
+            <tr>
+                <th>Exercice </th>
+               
+                <td>{{ programme.exercices.getNomExercice() }}</td>
+                
+             
+            </tr>
+            <tr>
+                <th>Nbr Repetition  </th>
+                <td>{{ programme.exercices.getNbrRepetition()}}</td>
+            </tr>
+            <tr>
+                <th>Nbr Serie  </th>
+                <td>{{ programme.exercices.getNbrSerie()}}</td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+
+  <a href="{{ path('app_programmeUser_index') }}">back to list</a>
+
+   
+
+{% endblock %}

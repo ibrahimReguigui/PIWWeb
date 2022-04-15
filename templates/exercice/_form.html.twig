@@ -1,0 +1,48 @@
+{# {{ form_start(form) }} 
+    {{ form_widget(form) }}
+    <button style="color:green;"class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_errors(form) }}
+
+    {{ form_end(form) }}
+{{ form_end(form) }} #}
+
+{{ form_start(form,{'attr':{'novalidate':'novalidate'} }) }}
+
+<table>
+<tr>
+<td>{{ form_label(form.nomExercice) }}</td>
+<td>{{ form_widget(form.nomExercice) }}</td>
+<td>{{ form_errors(form.nomExercice,{'attr':{'class':'text-danger'}}) }} </td>
+</tr>
+<tr>
+    <td>{{ form_label(form.descriptionExercice) }}</td>
+    <td>{{ form_widget(form.descriptionExercice) }}</td>
+    <td>{{ form_errors(form.descriptionExercice,{'attr':{'class':'text-danger'}}) }} </td>
+    </tr>
+    <tr>
+        <td>{{ form_label(form.categorieExercice) }}</td>
+        <td>{{ form_widget(form.categorieExercice) }}</td>
+        <td>{{ form_errors(form.categorieExercice,{'attr':{'class':'text-danger'}}) }} </td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.nbrRepetition) }}</td>
+            <td>{{ form_widget(form.nbrRepetition) }}</td>
+            <td>{{ form_errors(form.nbrRepetition,{'attr':{'class':'text-danger'}}) }} </td>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.nbrSerie) }}</td>
+                <td>{{ form_widget(form.nbrSerie) }}</td>
+                <td>{{ form_errors(form.nbrSerie,{'attr':{'class':'text-danger'}}) }} </td>
+             
+                </tr>
+                <tr>
+                        
+                
+               
+                    <td>
+                        <button style="color:green;"class="btn">{{ button_label|default('Save') }}</button>
+
+                    </td>
+                </tr>
+</table>
+{{ form_end(form) }} 
