@@ -22,7 +22,7 @@ class CaracController extends AbstractController
     public function index(CaracteristiquesportifRepository $csr): Response
     {
         return $this->render('carac/index.html.twig', [
-                'caracs' => $csr->findById(5),
+                'caracs' => $csr->findById(19),
             ]);
 
     }
@@ -60,7 +60,7 @@ class CaracController extends AbstractController
         $em->remove($cs);
         $em->flush();
 
-        return $this->redirectToRoute('display_blog');
+        return $this->redirectToRoute('app_carac');
 
 
     }
