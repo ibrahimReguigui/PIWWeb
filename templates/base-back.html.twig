@@ -6,7 +6,7 @@
 <html class="no-js" lang="en">
 <!--<![endif]-->
 
-{% block head %}{% endblock %}
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -175,7 +175,7 @@
         <div class="col-sm-4">
             <div class="page-header float-left">
                 <div class="page-title">
-                    <h1>Dashboard</h1>
+                    <h1>{% block titreGauche %}Dashboard{% endblock %}</h1>
                 </div>
             </div>
         </div>
@@ -183,7 +183,7 @@
             <div class="page-header float-right">
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
-                        <li class="active">Dashboard</li>
+                        <li class="active">{% block titreDroite %}Dashboard{% endblock %}</li>
                     </ol>
                 </div>
             </div>
@@ -191,6 +191,16 @@
     </div>
 
     <div class="content mt-3">
+        {% for message in app.flashes('failure') %}
+            <div class="alert alert-success" style="background-color:#b2c2bf;text-align: center">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success" style="text-align: center">
+                {{ message }}
+            </div>
+        {% endfor %}
         {% block body %}
 
         <div class="col-sm-12">

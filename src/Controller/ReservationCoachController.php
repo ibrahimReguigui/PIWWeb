@@ -2,48 +2,95 @@
 
 namespace App\Controller;
 
+use App\Entity\DisponibiliteCoach;
 use App\Entity\ReservationCoach;
+use App\Entity\Utilisateur;
 use App\Form\ReservationCoachType;
+use App\Repository\DisponibiliteCoachRepository;
 use App\Repository\ReservationCoachRepository;
+use App\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/sportif/reservation")
+ * @Route("/sportif/coach")
  */
 class ReservationCoachController extends AbstractController
 {
+
     /**
-     * @Route("/", name="app_reservation_coach_index", methods={"GET"})
+     * @Route("/disponibilite", name="app_reservation_coach_disponibilite", methods={"GET"})
      */
-    public function index(ReservationCoachRepository $reservationCoachRepository): Response
+    public function disponibilite(DisponibiliteCoachRepository $disponibiliteCoachRepository): Response
     {
-        return $this->render('reservation_coach/index.html.twig', [
-            'reservation_coaches' => $reservationCoachRepository->findAll(),
+        return $this->render('reservation_coach/disponibilite.html.twig', [
+            'disponibilite_coaches' => $disponibiliteCoachRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="app_reservation_coach_new", methods={"GET", "POST"})
+     * @Route("/reserver/{idCoach}/{idDisponibilite}", name="app_reservation_coach_reserver", methods={"GET"})
      */
-    public function new(Request $request, ReservationCoachRepository $reservationCoachRepository): Response
-    {
-        $reservationCoach = new ReservationCoach();
-        $form = $this->createForm(ReservationCoachType::class, $reservationCoach);
-        $form->handleRequest($request);
+    public function reserver($idDisponibilite,$idCoach,ReservationCoachRepository $reservationCoachRepository,UtilisateurRepository $utilisateurRepository,
+                             DisponibiliteCoachRepository $disponibiliteCoachRepository): Response
+    {   $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(Utilisateur::class)->find(6);
+        $coach=$utilisateurRepository->find($idCoach);
+        $disponibilite=$disponibiliteCoachRepository->find($idDisponibilite);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $reservationCoachRepository->add($reservationCoach);
-            return $this->redirectToRoute('app_reservation_coach_index', [], Response::HTTP_SEE_OTHER);
+//$reservationCoachRepository->findOneBy(['idCoach'=>$idCoach,'idParticipant'=>$user->getId(),'date'=>$disponibilite->getDate(),'time'=>$disponibilite->getTime()]);
+
+        if (empty($reservationCoachRepository->findReservation($idCoach,$user->getId(),
+            $disponibilite->getDate(),$disponibilite->getTime()))){
+            $reservation=new ReservationCoach();
+            $reservation->setIdCoach($coach);
+            $reservation->setIdParticipant($user);
+
+            $reservation->setDate($disponibilite->getDate());
+            $reservation->setTime($disponibilite->getTime());
+            $reservation->setEtat('En Attente');
+
+            $em->persist($reservation);
+            $em->flush();
+            $this->addFlash('success', 'Reservation Ajoutée !!!');
+            return $this->redirectToRoute('app_reservation_coach_reservation');
+        }
+        else{
+            $this->addFlash('failure', 'Vous Avez Deja Reservée Dans Ce Cour !!!');
+            return $this->redirectToRoute('app_reservation_coach_disponibilite');
         }
 
-        return $this->render('reservation_coach/new.html.twig', [
-            'reservation_coach' => $reservationCoach,
-            'form' => $form->createView(),
+    }
+
+    /**
+     * @Route("/reservation", name="app_reservation_coach_reservation")
+     */
+    public function reservation(ReservationCoachRepository $reservationCoachRepository): Response
+    {   $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(Utilisateur::class)->find(6);
+
+        return $this->render('reservation_coach/reservation.html.twig', [
+            'reservations' => $reservationCoachRepository->findBy(['idParticipant'=>($user->getId())]),
         ]);
     }
+
+    /**
+     * @Route("/reservation/annuler/{id}", name="app_reservation_coach_annuler")
+     */
+    public function annulerReservation(ReservationCoachRepository $reservationCoachRepository,$id): Response
+    {
+
+        $reservation=$reservationCoachRepository->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($reservation);
+        $em->flush();
+
+        return $this->redirectToRoute('app_reservation_coach_reservation');
+    }
+
+
 
     /**
      * @Route("/{id}", name="app_reservation_coach_show", methods={"GET"})
@@ -55,34 +102,7 @@ class ReservationCoachController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="app_reservation_coach_edit", methods={"GET", "POST"})
-     */
-    public function edit(Request $request, ReservationCoach $reservationCoach, ReservationCoachRepository $reservationCoachRepository): Response
-    {
-        $form = $this->createForm(ReservationCoachType::class, $reservationCoach);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $reservationCoachRepository->add($reservationCoach);
-            return $this->redirectToRoute('app_reservation_coach_index', [], Response::HTTP_SEE_OTHER);
-        }
 
-        return $this->render('reservation_coach/edit.html.twig', [
-            'reservation_coach' => $reservationCoach,
-            'form' => $form->createView(),
-        ]);
-    }
 
-    /**
-     * @Route("/{id}", name="app_reservation_coach_delete", methods={"POST"})
-     */
-    public function delete(Request $request, ReservationCoach $reservationCoach, ReservationCoachRepository $reservationCoachRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$reservationCoach->getId(), $request->request->get('_token'))) {
-            $reservationCoachRepository->remove($reservationCoach);
-        }
-
-        return $this->redirectToRoute('app_reservation_coach_index', [], Response::HTTP_SEE_OTHER);
-    }
 }

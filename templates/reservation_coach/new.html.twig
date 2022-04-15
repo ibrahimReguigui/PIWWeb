@@ -1,11 +1,11 @@
-{% extends 'front/fresh-base.html.twig' %}
+{% extends 'base-back.html.twig' %}
 
-{% block title %}New ReservationCoach{% endblock %}
+{% block header %}<h1 style="text-align:center;">Create new ReservationCoach</h1>{% endblock %}
 
 {% block body %}
-    <h1>Create new ReservationCoach</h1>
+
 
     {{ include('reservation_coach/_form.html.twig') }}
 
-    <a href="{{ path('app_reservation_coach_index') }}">back to list</a>
+    <a href="{{ path('app_reservation_coach_index') }}"class="btn btn-outline-danger">Retour</a>
 {% endblock %}

@@ -47,8 +47,8 @@
                     {% block header %}
                     <h2>{% block pagetitle %}Products{% endblock %}</h2>
                     <div class="bt-option">
-                            <a href="">{% block pagetitle1 %}{% endblock %}</a>
-                        <span>{% block pagetitle2 %}{% endblock %}</span>
+                            <a href="">Home</a>
+                        <span>Products</span>
                     </div>
                     {% endblock %}
                 </div>
@@ -58,25 +58,11 @@
 </section>
 <!-- Breadcrumb Section End -->
 
-
-{% for message in app.flashes('failure') %}
-    <div class="alert alert-success" style="background-color:#b2c2bf;text-align: center">
-        {{ message }}
-    </div>
-{% endfor %}
-{% for message in app.flashes('success') %}
-    <div class="alert alert-success" style="text-align: center">
-        {{ message }}
-    </div>
-{% endfor %}
-
-
 <!-- ChoseUs Section Begin -->
 <section class="choseus-section spad" style="background-color:white;text-align:center" >
     <div class="container">
         {% block body %}
         {% endblock %}
-
     </div>
 </section>
 <!-- ChoseUs Section End -->
@@ -87,7 +73,7 @@
             <div class="col-md-4">
                 <div class="gt-text">
                     <i class="fa fa-map-marker"></i>
-                    <p>Esprit,<br/> Ariana Sogra</p>
+                    <p>333 Middle Winchendon Rd, Rindge,<br/> NH 03461</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -117,7 +103,7 @@
             <div class="col-lg-4">
                 <div class="fs-about">
                     <div class="fa-logo">
-                        <a href="#"><img src="{{  asset('logo.png') }}" alt=""></a>
+                        <a href="#"><img src="img/logo.png" alt=""></a>
                     </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore dolore magna aliqua endisse ultrices gravida lorem.</p>

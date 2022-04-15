@@ -1,0 +1,38 @@
+{% extends 'base-front.html.twig' %}
+
+{% block pagetitle %}Liste Disponibilitées{% endblock %}
+{% block pagetitle1 %}Coach{% endblock %}
+{% block pagetitle2 %}Liste Disponibilitées{% endblock %}
+{% block body %}
+
+
+    <table class="table table-bordered bg-white mt-5 mb-5">
+        <thead class="thead-dark">
+        <tr>
+
+            <th>Coach</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for disponibilite_coache in disponibilite_coaches %}
+            <tr>
+
+                <td>{{ disponibilite_coache.idCoach.nom }}</td>
+                <td>{{ disponibilite_coache.date|date('Y-m-d') }}</td>
+                <td>{{ disponibilite_coache.time|date('H:i:s') }}</td>
+                <td>
+                    <a href="{{ path('app_reservation_coach_reserver', {'idCoach': disponibilite_coache.idCoach.id,
+                            'idDisponibilite':disponibilite_coache.id}) }}" >Reserver</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -25,7 +25,7 @@ class Utilisateur
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity=CourSalle::class, mappedBy="Utilisateur", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=CourSalle::class, mappedBy="Utilisateur")
      */
     private $courSalles;
 
@@ -64,6 +64,11 @@ class Utilisateur
      */
     private $whoami;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ReservationCoach::class, mappedBy="idCoach", orphanRemoval=true)
+     */
+    private $reservationCoachCoach;
+
 
     public function __construct()
     {
@@ -73,6 +78,7 @@ class Utilisateur
         $this->abonnementsSportif = new ArrayCollection();
         $this->disponibiliteCoaches = new ArrayCollection();
         $this->reservationCoaches = new ArrayCollection();
+        $this->reservationCoachCoach = new ArrayCollection();
 
     }
 
@@ -313,6 +319,36 @@ class Utilisateur
     public function setWhoami(string $whoami): self
     {
         $this->whoami = $whoami;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ReservationCoach>
+     */
+    public function getReservationCoachCoach(): Collection
+    {
+        return $this->reservationCoachCoach;
+    }
+
+    public function addReservationCoachCoach(ReservationCoach $reservationCoachCoach): self
+    {
+        if (!$this->reservationCoachCoach->contains($reservationCoachCoach)) {
+            $this->reservationCoachCoach[] = $reservationCoachCoach;
+            $reservationCoachCoach->setIdCoach($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservationCoachCoach(ReservationCoach $reservationCoachCoach): self
+    {
+        if ($this->reservationCoachCoach->removeElement($reservationCoachCoach)) {
+            // set the owning side to null (unless already changed)
+            if ($reservationCoachCoach->getIdCoach() === $this) {
+                $reservationCoachCoach->setIdCoach(null);
+            }
+        }
 
         return $this;
     }

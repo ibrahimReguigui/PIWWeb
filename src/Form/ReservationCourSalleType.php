@@ -17,6 +17,7 @@ class ReservationCourSalleType extends AbstractType
         $builder
             ->add('idSalle', EntityType::class,['label' => 'salle','class'=>Utilisateur::class,'required'=>true,'choice_label'=>'nom','multiple'=>false])
             ->add('idCour',EntityType::class,['label' => 'cour','class'=>CourSalle::class,'required'=>true,'choice_label'=>'nom_cour','multiple'=>false])
+
         ;
     }
 

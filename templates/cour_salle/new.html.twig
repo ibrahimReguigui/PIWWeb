@@ -1,11 +1,10 @@
 {% extends 'base-back.html.twig' %}
 
-{% block title %}New CourSalle{% endblock %}
-
+{% block titreGauche %}Salle > Nouveau Cour{% endblock %}
+{% block titreDroite %}Salle3{% endblock %}
 {% block body %}
-    <h1>Create new CourSalle</h1>
+
 
     {{ include('cour_salle/_form.html.twig') }}
-
-    <a href="{{ path('app_cour_salle_index') }}">back to list</a>
+    <a href="{{ path('app_cour_salle_index') }}"type="button" class="btn btn-outline-danger">Retour</a>
 {% endblock %}

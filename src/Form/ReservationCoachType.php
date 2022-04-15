@@ -13,7 +13,7 @@ class ReservationCoachType extends AbstractType
     {
         $builder
             ->add('etat')
-            ->add('idReservation')
+            ->add('idCoach')
             ->add('idParticipant')
         ;
     }
