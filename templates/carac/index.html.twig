@@ -3,10 +3,12 @@
 {% block title %}Hello CaracController!{% endblock %}
 
 {% block body %}
-    <h1>ReservationCoach index</h1>
 
+    <h1>vos Besoins</h1>
     <table class="table">
         <thead>
+
+
         <tr>
             <th>Votre Taille</th>
             <th>Votre Poid</th>
@@ -25,7 +27,7 @@
                 <td>{{ c.tailleSportif }}</td>
                 <td>{{ c.poidSportif }}</td>
                 <td>{{ c.ageSportif }}</td>
-                <td></td>
+                <td>{{ c.objectifNutrition }}</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -35,7 +37,8 @@
                 <td>
 
 
-                    <a href="{{ path('modifCa', {'id': c.id}) }}">edit</a>
+                    <a href="{{ path('modifCa', {'id': c.id}) }}">Edit</a>
+                    <a  href="{{ path('removeCa', {'id': c.id}) }}">Delete</a>
 
                 </td>
             </tr>
@@ -47,5 +50,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_reservation_coach_new') }}">Create new</a>
+    <a href="{{ path('addCarac') }}">Create new</a>
 {% endblock %}

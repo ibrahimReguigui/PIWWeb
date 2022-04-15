@@ -16,6 +16,7 @@ class CaracType extends AbstractType
             ->add('tailleSportif')
             ->add('poidSportif')
             ->add('ageSportif')
+
             ->add('sexe', ChoiceType::class,[
                 'choices'=>[
                     'Homme'=>"Homme",
@@ -23,8 +24,18 @@ class CaracType extends AbstractType
                 ],
             ])
 
-            ->add('objectifNutrition')
+            ->add('objectifNutrition', ChoiceType::class,[
+                'choices'=>[
+                    'Gain de poid'=>"Gain de poid",
+                    'Pert de poid'=>"Pert de poid",
+
+                ],
+            ])
+
             ->add('ajouter', SubmitType::class)
+
+
+
 
         ;
     }

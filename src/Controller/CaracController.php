@@ -22,8 +22,8 @@ class CaracController extends AbstractController
     public function index(CaracteristiquesportifRepository $csr): Response
     {
         return $this->render('carac/index.html.twig', [
-            'caracs' => $csr->findById(3),
-        ]);
+                'caracs' => $csr->findById(5),
+            ]);
 
     }
 //Ajouter
@@ -52,7 +52,7 @@ class CaracController extends AbstractController
     }
 //delete
     /**
-     * @Route("/removeBlog/{id}", name="supp_blog")
+     * @Route("/removeC/{id}", name="removeCa")
      */
     public function suppressionBlog(Caracteristiquesportif  $cs): Response
     {

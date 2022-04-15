@@ -4,6 +4,10 @@ namespace App\Entity;
 
 use App\Repository\CaracteristiquesportifRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+
 
 /**
  * @ORM\Entity(repositoryClass=CaracteristiquesportifRepository::class)
@@ -18,16 +22,31 @@ class Caracteristiquesportif
     private $id;
 
     /**
+     * @Assert\NotBlank(message="la taille  doit etre non vide")
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      * @ORM\Column(type="integer", nullable=true)
      */
     private $tailleSportif;
 
     /**
+     * @Assert\NotBlank(message="le poid  doit etre non vide")
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      * @ORM\Column(type="integer", nullable=true)
      */
     private $poidSportif;
 
     /**
+     * @Assert\NotBlank(message="l'age  doit etre non vide")
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
      * @ORM\Column(type="integer", nullable=true)
      */
     private $ageSportif;
