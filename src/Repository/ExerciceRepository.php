@@ -39,6 +39,7 @@ class ExerciceRepository extends ServiceEntityRepository
      */
     public function remove(Exercice $entity, bool $flush = true): void
     {
+        
         $this->_em->remove($entity);
         if ($flush) {
             $this->_em->flush();

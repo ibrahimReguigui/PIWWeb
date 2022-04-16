@@ -21,6 +21,7 @@ class Exercice
     private $id;
 
    /**
+    
      * @Assert\NotBlank(message=" Nom doit etre non vide")
      * @Assert\Length(
      *      min = 4,
@@ -33,6 +34,7 @@ class Exercice
 
     /**
      * @Assert\NotBlank(message="description  doit etre non vide")
+      * @Assert\NotNull
      * @Assert\Length(
      *      min = 7,
      *      max = 100,
@@ -44,13 +46,15 @@ class Exercice
 
     /**
      * @Assert\NotBlank(message="Categorie  doit etre non vide")
+  
      * @ORM\Column(type="string", length=200)
      */
     private $categorieExercice;
 
     /**
      * @Assert\NotBlank(message="Nombre de repetition  doit etre non vide")
-    * @Assert\Type(
+  
+     * @Assert\Type(
      *     type="integer",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
@@ -60,16 +64,18 @@ class Exercice
 
     /**
      * @Assert\NotBlank(message="Nombre de Serie  doit etre non vide")
+  
     * @Assert\Type(
      *     type="integer",
      *     message="The value {{ value }} is not a valid {{ type }}."
      * )
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $nbrSerie;
 
     /**
      * @ORM\OneToMany(targetEntity=programme::class, mappedBy="exercices")
+      
      */
     private $programmes;
 
@@ -88,7 +94,7 @@ class Exercice
         return $this->nomExercice;
     }
 
-    public function setNomExercice(string $nomExercice): self
+    public function setNomExercice(?string $nomExercice): self
     {
         $this->nomExercice = $nomExercice;
 
@@ -100,7 +106,7 @@ class Exercice
         return $this->descriptionExercice;
     }
 
-    public function setDescriptionExercice(string $descriptionExercice): self
+    public function setDescriptionExercice(?string $descriptionExercice): self
     {
         $this->descriptionExercice = $descriptionExercice;
 
@@ -112,7 +118,7 @@ class Exercice
         return $this->categorieExercice;
     }
 
-    public function setCategorieExercice(string $categorieExercice): self
+    public function setCategorieExercice(?string $categorieExercice): self
     {
         $this->categorieExercice = $categorieExercice;
 
@@ -124,7 +130,7 @@ class Exercice
         return $this->nbrRepetition;
     }
 
-    public function setNbrRepetition(int $nbrRepetition): self
+    public function setNbrRepetition(?int $nbrRepetition): self
     {
         $this->nbrRepetition = $nbrRepetition;
 
@@ -136,7 +142,7 @@ class Exercice
         return $this->nbrSerie;
     }
 
-    public function setNbrSerie(int $nbrSerie): self
+    public function setNbrSerie(?int $nbrSerie): self
     {
         $this->nbrSerie = $nbrSerie;
 

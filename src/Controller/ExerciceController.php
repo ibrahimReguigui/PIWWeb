@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Exercice;
+use App\Entity\Programme;
 use App\Form\ExerciceType;
 use App\Repository\ExerciceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

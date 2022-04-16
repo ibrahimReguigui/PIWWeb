@@ -1,9 +1,41 @@
 
 
 
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button style="color: blue;" class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{{ form_start(form,{'attr':{'novalidate':'novalidate'} }) }}
+
+<table>
+
+<tr>
+<td>{{ form_label(form.nomProgramme) }}</td>
+<td>{{ form_widget(form.nomProgramme) }}</td>
+</tr>
+
+<tr>
+
+    <td>{{ form_label(form.objectifProgramme) }}</td>
+    <td>{{ form_widget(form.objectifProgramme) }}</td>
+ {#    <td>{{ form_errors(form.objectifProgramme,{'attr':{'class':'text-danger'}}) }} </td> #}
+</tr>
+
+    <tr>
+        <td>{{ form_label(form.descriptionProgramme) }}</td>
+        <td>{{ form_widget(form.descriptionProgramme) }}</td>
+        </tr>
+        <tr>
+            <td>{{ form_label(form.categorieProgramme) }}</td>
+            <td>{{ form_widget(form.categorieProgramme) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form_label(form.exercices) }}</td>
+                <td>{{ form_widget(form.exercices) }}</td>
+            </tr>
+            
+            <td>
+                <button class="btn btn-success" >{{ button_label|default('Save') }}</button>
+
+            </td>
+        </tr>
 
 
+</table>
+{{ form_end(form) }} 

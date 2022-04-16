@@ -4,7 +4,7 @@
     {{ form_errors(form) }}
 
     {{ form_end(form) }}
-{{ form_end(form) }} #}
+{{ form_end(form) }}  #}
 
 {{ form_start(form,{'attr':{'novalidate':'novalidate'} }) }}
 
@@ -35,14 +35,12 @@
                 <td>{{ form_errors(form.nbrSerie,{'attr':{'class':'text-danger'}}) }} </td>
              
                 </tr>
-                <tr>
-                        
-                
-               
+            
                     <td>
-                        <button style="color:green;"class="btn">{{ button_label|default('Save') }}</button>
+                        <button class="btn btn-success" >{{ button_label|default('Save') }}</button>
 
                     </td>
                 </tr>
 </table>
 {{ form_end(form) }} 
+

@@ -25,8 +25,8 @@
                 <td>{{ programme.descriptionProgramme }}</td>
                 <td>{{ programme.categorieProgramme }}</td>
                 <td>
-                    <a style="color:green;" href="{{ path('app_programme_show', {'id': programme.id}) }}">show</a>
-                    <a style="color: red;"  href="{{ path('app_programme_edit', {'id': programme.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('app_programme_show', {'id': programme.id}) }}">show</a>
+                    <a class="btn btn-warning"  href="{{ path('app_programme_edit', {'id': programme.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +37,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_programme_new') }}">Create new</a>
+    <a class="btn btn-outline-primary" href="{{ path('app_programme_new') }}">Create new</a>
 {% endblock %}

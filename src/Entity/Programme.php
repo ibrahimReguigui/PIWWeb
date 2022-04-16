@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProgrammeRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=ProgrammeRepository::class)
  */
@@ -18,27 +18,47 @@ class Programme
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message=" Nom doit etre non vide")
+     * @Assert\NotNull
+     * @Assert\Length(
+     *      min = 4,
+     *      minMessage=" Entrer un titre au mini de 4 caracteres"
+     *
+     *     )
+     * @ORM\Column(type="string", length=100,nullable=true)
      */
     private $nomProgramme;
 
     /**
+     * @Assert\NotBlank(message="Objectif  doit etre non vide")
+     * @Assert\NotNull
      * @ORM\Column(type="string", length=100)
      */
     private $objectifProgramme;
 
     /**
+     * @Assert\NotBlank(message="description  doit etre non vide")
+     * @Assert\Length(
+     *      min = 7,
+     *      max = 100,
+     *      minMessage = "doit etre >=7 ",
+     *      maxMessage = "doit etre <=100" )
      * @ORM\Column(type="string", length=255)
      */
     private $descriptionProgramme;
 
     /**
+     * @Assert\NotBlank(message="Objectif  doit etre non vide")
+      * @Assert\NotNull
      * @ORM\Column(type="string", length=100)
      */
     private $categorieProgramme;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Exercice::class, inversedBy="programmes")
+     * @Assert\NotBlank(message="description  doit etre non vide")
+      * @Assert\NotNull
+     * @ORM\ManyToOne(targetEntity=Exercice::class)
+     * @ORM\JoinColumn(name="exercices_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $exercices;
 
@@ -53,7 +73,7 @@ class Programme
         return $this->nomProgramme;
     }
 
-    public function setNomProgramme(string $nomProgramme): self
+    public function setNomProgramme(?string $nomProgramme): self
     {
         $this->nomProgramme = $nomProgramme;
 
@@ -65,7 +85,7 @@ class Programme
         return $this->objectifProgramme;
     }
 
-    public function setObjectifProgramme(string $objectifProgramme): self
+    public function setObjectifProgramme(?string $objectifProgramme): self
     {
         $this->objectifProgramme = $objectifProgramme;
 
@@ -77,7 +97,7 @@ class Programme
         return $this->descriptionProgramme;
     }
 
-    public function setDescriptionProgramme(string $descriptionProgramme): self
+    public function setDescriptionProgramme(?string $descriptionProgramme): self
     {
         $this->descriptionProgramme = $descriptionProgramme;
 
@@ -89,7 +109,7 @@ class Programme
         return $this->categorieProgramme;
     }
 
-    public function setCategorieProgramme(string $categorieProgramme): self
+    public function setCategorieProgramme(?string $categorieProgramme): self
     {
         $this->categorieProgramme = $categorieProgramme;
 
