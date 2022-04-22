@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Repository;
-
 use App\Entity\Exercice;
+
+use App\Entity\Programme;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,7 +22,14 @@ class ExerciceRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Exercice::class);
     }
+    public function findAllWithPagination() : Query{
+        return $this->createQueryBuilder('e')
+        ->getQuery();
 
+    }
+
+
+    
     /**
      * @throws ORMException
      * @throws OptimisticLockException
