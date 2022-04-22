@@ -7,6 +7,9 @@ use App\Entity\Utilisateur;
 use App\Form\ReservationCourSalleType;
 use App\Repository\CourSalleRepository;
 use App\Repository\ReservationCourSalleRepository;
+use App\Repository\UtilisateurRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -62,15 +65,20 @@ class ReservationCourSalleController extends AbstractController
 
 
     /**
-     * @Route("/listeCour", name="app_liste_cour_salle")
+     * @Route("/listeCour", name="app_liste_cour_salle", methods={"GET"})
      */
-    public function listeCour( CourSalleRepository $courSalleRepository): Response
+    public function listeCour( CourSalleRepository $courSalleRepository,PaginatorInterface $paginator,Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(Utilisateur::class)->find(6);
-
+        $cour_salles=$courSalleRepository->findAll();
+        $cour_salles=$paginator->paginate(
+            $cour_salles,// Requête contenant les données à paginer (ici les publications)
+            $request->query->getInt('page',1),// Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6   // Nombre de résultats par page
+        );
         return $this->render('reservation_cour_salle/liste_cour.html.twig', [
-            'cour_salles' => $courSalleRepository->findAll(),
+            'cour_salles' => $cour_salles,
         ]);
     }
 
@@ -91,5 +99,40 @@ class ReservationCourSalleController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('app_liste_reservation_cour_salle_index');
+    }
+    /**
+     * @Route("/recherche",name="recherche")
+     */
+    public function Recherche(CourSalleRepository $courSalleRepository,Request $request,UtilisateurRepository $utilisateurRepository,PaginatorInterface $paginator){
+        $data=$request->get('search');
+        $bycour=$request->get('Nom_Cour');
+        $bysalle=$request->get('Nom_Salle');
+        $byHeure=$request->get('Heure');
+        $byDate=$request->get('Date');
+        $res1=[];
+        $res2=[];
+        $res3=[];
+        $res4=[];
+        if ($bycour=='on' ) {
+            $res1 = $courSalleRepository->nomCourLike($data);
+        }
+        if ($bysalle=='on' ) {
+            $res2 = $courSalleRepository->nomSalleLike($data);
+        }
+        if ($byHeure=='on' ) {
+            $res3 = $courSalleRepository->heureCourLike($data);
+        }
+        if ($byDate=='on' ) {
+            $res4 = $courSalleRepository->dateCourLike($data);
+        }
+            $search=new ArrayCollection(array_merge($res1,$res2,$res3,$res4));
+            $search=$paginator->paginate(
+            $search,// Requête contenant les données à paginer (ici les publications)
+            $request->query->getInt('page',1),// Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            5   // Nombre de résultats par page
+        );
+        return $this->render('reservation_cour_salle/liste_cour.html.twig', [
+            'cour_salles' => $search,
+        ]);
     }
 }

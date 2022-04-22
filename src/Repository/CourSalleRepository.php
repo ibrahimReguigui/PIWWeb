@@ -84,4 +84,36 @@ class CourSalleRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+    public function nomSalleLike($data){
+        return $this->createQueryBuilder('c')
+            ->join('c.Utilisateur','u')
+            ->addSelect('u')
+            ->where('u.nom LIKE :data')
+            ->andWhere('u.whoami =:salle')
+            ->setParameter('data', '%'.$data.'%')
+            ->setParameter('salle', 'salle')
+            ->getQuery()
+            ->getResult();
+    }
+    public function nomCourLike($data){
+        return $this->createQueryBuilder('c')
+            ->where('c.nomCour LIKE :data')
+            ->setParameter('data', '%'.$data.'%')
+            ->getQuery()
+            ->getResult();
+    }
+    public function dateCourLike($data){
+        return $this->createQueryBuilder('c')
+            ->where('c.date LIKE :data')
+            ->setParameter('data', '%'.$data.'%')
+            ->getQuery()
+            ->getResult();
+    }
+    public function heureCourLike($data){
+        return $this->createQueryBuilder('c')
+            ->where('c.tCour LIKE :data')
+            ->setParameter('data', '%'.$data.'%')
+            ->getQuery()
+            ->getResult();
+    }
 }

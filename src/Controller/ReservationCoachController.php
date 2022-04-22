@@ -9,6 +9,7 @@ use App\Form\ReservationCoachType;
 use App\Repository\DisponibiliteCoachRepository;
 use App\Repository\ReservationCoachRepository;
 use App\Repository\UtilisateurRepository;
+use Swift_Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -79,14 +80,19 @@ class ReservationCoachController extends AbstractController
     /**
      * @Route("/reservation/annuler/{id}", name="app_reservation_coach_annuler")
      */
-    public function annulerReservation(ReservationCoachRepository $reservationCoachRepository,$id): Response
+    public function annulerReservation(ReservationCoachRepository $reservationCoachRepository,$id, Swift_Mailer $mailer): Response
     {
 
         $reservation=$reservationCoachRepository->find($id);
+        $message=(new \Swift_Message('Reservation Annulée'));
+        $message->setFrom("ibrahim.reguigui@esprit.tn");
+        $message->setTo($reservation->getIdParticipant()->getAdresseMail());
+        $message->setBody("Nous sommes desolé de vous informer que votre reservation du ".$reservation->getDate()->format('Y-m-d')." ".$reservation->getTime()->format('H:i:s')." a été annulée");
+        $mailer->send($message);
         $em = $this->getDoctrine()->getManager();
         $em->remove($reservation);
         $em->flush();
-
+        $this->addFlash('success', 'Mail envoyée !!!');
         return $this->redirectToRoute('app_reservation_coach_reservation');
     }
 

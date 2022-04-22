@@ -98,4 +98,5 @@ class ReservationCourSalleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
 }

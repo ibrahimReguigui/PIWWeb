@@ -4,6 +4,29 @@
 {% block pagetitle1 %}Cours{% endblock %}
 {% block pagetitle2 %}Liste Cours{% endblock %}
 {% block body %}
+    <form method="post" action="{{ path('recherche') }}">
+        <label >Recherche</label>
+        <input type="text" name="search"><input type="submit" value="Recherche">
+        <div style="display:flex;justify-content: center;flex-wrap: wrap;align-content: space-around;flex-direction: row">
+            <div style="width:150px">
+                <input type="checkbox" id="Nom_Cour" name="Nom_Cour">
+                <label >Nom Cour</label>
+            </div>
+            <div style="width:100px">
+                <input type="checkbox" id="Nom_Salle" name="Nom_Salle">
+                <label >Nom_Salle</label>
+            </div>
+            <div style="width:100px">
+                <input type="checkbox" id="Date" name="Date">
+                <label >Date</label>
+            </div>
+            <div style="width:100px">
+                <input type="checkbox" id="Heure" name="Heure">
+                <label >Heure</label>
+            </div>
+        </div>
+
+    </form>
 
     <table class="table table-bordered bg-white mt-5 mb-5">
     <thead class="thead-dark">
@@ -40,5 +63,9 @@
         </tr>
     {% endfor %}
     </tbody>
+
     </table>
+    <div class="navigation" style="display:flex;justify-content: center;">
+        {{ knp_pagination_render(cour_salles) }}
+    </div>
 {% endblock %}
