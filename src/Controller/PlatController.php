@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Plat;
 use App\Form\PlatType;
 use App\Repository\PlatRepository;
+use ContainerSZ38lHK\PaginatorInterface_82dac15;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface; // Nous appelons le bundle KNP Paginator
 
 /**
  * @Route("/plat")
@@ -18,10 +20,16 @@ class PlatController extends AbstractController
     /**
      * @Route("/", name="app_plat_index", methods={"GET"})
      */
-    public function index(PlatRepository $platRepository): Response
+    public function index(PlatRepository $platRepository,Request $request,PaginatorInterface $paginator): Response
     {
+        $donnees=$platRepository->findAll();
+        $plats = $paginator->paginate(
+            $donnees,
+            $request->query->getInt('page', 1),
+            4 
+        );
         return $this->render('plat/index.html.twig', [
-            'plats' => $platRepository->findAll(),
+            'plats' => $plats,
         ]);
     }
 
