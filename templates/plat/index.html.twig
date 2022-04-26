@@ -5,6 +5,45 @@
 {% block body %}
     <h1>Plat index</h1>
 
+    <div class="content mt-3">
+        <div class="animated fadeIn">
+            <div class="row">
+                {% for plat in plats %}
+                <div class="col-md-4">
+                    <aside class="profile-nav alt">
+                        <section class="card">
+                            <div class="card-header user-header alt bg-dark">
+                                <div class="media">
+                                    <a href="#">
+                                        <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/admin.jpg">
+                                    </a>
+                                    <div class="media-body">
+                                        <h2 class="text-light display-6">{{ plat.nom }}</h2>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <a href="#">  Poids <span class="badge badge-primary pull-right">{{ plat.poids }}</span></a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#">  Calories <span class="badge badge-danger pull-right">{{ plat.calories }}</span></a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#"> Protein <span class="badge badge-success pull-right">{{ plat.protein }}</span></a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="#">  Type <span class="badge badge-warning pull-right r-activity">{{ plat.type }}</span></a>
+                                </li>
+                            </ul>
+                        </section>
+                    </aside>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
     <table class="table">
         <thead>

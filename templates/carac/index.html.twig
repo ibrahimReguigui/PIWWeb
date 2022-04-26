@@ -22,34 +22,37 @@
         </tr>
         </thead>
         <tbody>
-        {% for c in caracs %}
+
             <tr>
-                <td>{{ c.tailleSportif }}</td>
-                <td>{{ c.poidSportif }}</td>
-                <td>{{ c.ageSportif }}</td>
-                <td>{{ c.objectifNutrition }}</td>
-                <td>{{ c.bmiSportif }}</td>
-                <td>{{ c.besoinProteine }}</td>
-                <td>{{ c.besoinCarb }}</td>
-                <td>{{ c.besoinCalories }}</td>
+                <td>{{ carac.tailleSportif }}</td>
+                <td>{{ carac.poidSportif }}</td>
+                <td>{{ carac.ageSportif }}</td>
+                <td>{{ carac.objectifNutrition }}</td>
+                <td>{{ carac.bmiSportif }}</td>
+                <td>{{ carac.besoinProteine }}</td>
+                <td>{{ carac.besoinCarb }}</td>
+                <td>{{ carac.besoinCalories }}</td>
 
 
                 <td>
 
 
-                    <a href="{{ path('modifCa', {'id': c.id}) }}">Edit</a>
-                    <a  href="{{ path('removeCa', {'id': c.id}) }}">Delete</a>
+                    <a href="{{ path('modifCa', {'id': carac.id}) }}">Edit</a>
+                    <a  href="{{ path('removeCa', {'id': carac.id}) }}">Delete</a>
 
                 </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
+
         </tbody>
     </table>
 
     <a href="{{ path('addCarac') }}">Create new</a><br>
-    <a href="{{ path('addCarac') }}">Mes Plats</a>
+
+    <a {% if carac.objectifNutrition == "Gain de poid" %}
+            href="{{ path('app_platfgain_index') }}
+            {% else %}
+            href="{{ path('app_platfperte_index') }}
+{% endif %}
+
+">Mes Plats</a>
 {% endblock %}

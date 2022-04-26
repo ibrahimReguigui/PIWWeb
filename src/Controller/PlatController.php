@@ -26,6 +26,36 @@ class PlatController extends AbstractController
     }
 
     /**
+     * @Route("/all/perte", name="app_platfperte_index", methods={"GET"})
+     */
+    public function indexfrontperte(PlatRepository $platRepository): Response
+    {
+        return $this->render('plat/indexf.html.twig', [
+            'plats' => $platRepository->findByfieldtype("perte"),
+        ]);
+    }
+
+    /**
+     * @Route("/all/gain", name="app_platfgain_index", methods={"GET"})
+     */
+    public function indexfrontgain(PlatRepository $platRepository): Response
+    {
+        return $this->render('plat/indexf.html.twig', [
+            'plats' => $platRepository->findByfieldtype("gain"),
+        ]);
+    }
+
+    /**
+     * @Route("/all", name="app_platf_index", methods={"GET"})
+     */
+    public function indexfront(PlatRepository $platRepository): Response
+    {
+        return $this->render('plat/indexf.html.twig', [
+            'plats' => $platRepository->findAll(),
+        ]);
+    }
+
+    /**
      * @Route("/new", name="app_plat_new", methods={"GET", "POST"})
      */
     public function new(Request $request, PlatRepository $platRepository): Response
