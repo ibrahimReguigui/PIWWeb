@@ -1,0 +1,42 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Plat index{% endblock %}
+
+{% block body %}
+    <h1>Plat index</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Calories</th>
+                <th>Poids</th>
+                <th>Protein</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for plat in plats %}
+            <tr>
+                <td>{{ plat.nom }}</td>
+                <td>{{ plat.type }}</td>
+                <td>{{ plat.calories }}</td>
+                <td>{{ plat.poids }}</td>
+                <td>{{ plat.protein }}</td>
+                <td>
+                    <button class="btn btn-outline-primary"><a href="{{ path('app_plat_show', {'id': plat.id}) }}">show</a></button>
+                    <button class="btn btn-outline-primary"><a href="{{ path('app_plat_edit', {'id': plat.id}) }}">edit</a></button>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+<button class="btn btn-outline-primary"><a href="{{ path('app_plat_new') }}">Create new</a></button>
+{% endblock %}

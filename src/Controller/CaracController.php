@@ -7,6 +7,7 @@ use App\Entity\Caracteristiquesportif;
 use App\Entity\Utilisateur;
 use App\Form\CaracType;
 use App\Form\CourSalleType;
+use App\Metiers\calculsMetier;
 use App\Repository\CaracteristiquesportifRepository;
 use App\Repository\CourSalleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +23,7 @@ class CaracController extends AbstractController
     public function index(CaracteristiquesportifRepository $csr): Response
     {
         return $this->render('carac/index.html.twig', [
-                'caracs' => $csr->findById(25),
+                'caracs' => $csr->findById(29),
             ]);
 
     }
@@ -47,6 +48,7 @@ class CaracController extends AbstractController
      */
     public function addCarac(Request $request): Response
     {
+        $bes = new calculsMetier();
         $cs = new Caracteristiquesportif();
 
         $form = $this->createForm(CaracType::class,$cs);
@@ -55,8 +57,8 @@ class CaracController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $cs ->setBesoinCalories(1);
-            $em->persist($cs);
+
+            $em->persist($bes->calcul($cs));
 
             $em->flush();
 
@@ -84,13 +86,13 @@ class CaracController extends AbstractController
     /**
      * @Route("/modifC/{id}", name="modifCa")
      */
-    public function modifC(Caracteristiquesportif $cs,$id): Response
+    public function modifC(Request $request,$id): Response
     {
         $cs = $this->getDoctrine()->getManager()->getRepository(Caracteristiquesportif::class)->find($id);
 
         $form = $this->createForm(CaracType::class,$cs);
 
-        $form->handleRequest($cs);
+        $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

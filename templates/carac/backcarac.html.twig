@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <h1>vos Besoins</h1>
+    <h1>Tous les Besoins</h1>
     <table class="table">
         <thead>
 
@@ -28,11 +28,10 @@
                 <td>{{ c.poidSportif }}</td>
                 <td>{{ c.ageSportif }}</td>
                 <td>{{ c.objectifNutrition }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ c.bmiSportif }}</td>
+                <td>{{ c.besoinProteine }}</td>
+                <td>{{ c.besoinCarb }}</td>
+                <td>{{ c.besoinCalories }}</td>
 
                 <td>
 
@@ -51,5 +50,5 @@
     </table>
 
     <a href="{{ path('addCarac') }}">Create new</a><br>
-    <a href="{{ path('addCarac') }}">Plats</a>
+    <a href="{{ path('app_plat_index') }}">Plats</a>
 {% endblock %}
