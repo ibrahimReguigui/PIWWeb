@@ -2,11 +2,14 @@
 
 namespace App\Repository;
 
+use Doctrine\ORM\Query;
 use App\Entity\Programme;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
+use App\Entity\RechercheProgramme;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
 
 /**
  * @method Programme|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +22,12 @@ class ProgrammeRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Programme::class);
+    }
+
+    public function findAllWithPagination() : Query{
+        return $this->createQueryBuilder('p')
+        ->getQuery();
+
     }
 
     /**
@@ -73,4 +82,40 @@ class ProgrammeRepository extends ServiceEntityRepository
         ;
     }
     */
+
+/**
+     * @return Query
+     */
+    public function findAllVisibleQuery(RechercheProgramme $search)
+    {
+        //     $query = $this->findVisibleQuery();
+        //     if ($search->getMaxprice()) {
+        //         $query = $query->where('p.price <= :maxprice')
+        //             ->setParameter('maxprice', $search->getMaxprice());
+        //     }
+
+        //     return $query->getQuery();
+
+        $searching = $this->createQueryBuilder('Programme')
+            ->andWhere('Programme.nomProgramme LIKE :searchNom')
+            ->setParameter('searchNom', '%'. $search->getRechercheProgNom() .'%' )
+
+            ->andWhere('Programme.categorieProgramme LIKE :searchCategorie')
+            ->setParameter('searchCategorie', '%'. $search->getRechercheProgCate() .'%' )
+
+          /*   ->andWhere('Programme.objectifProgramme LIKE :searchObjectif')
+            ->setParameter('searchCategorie', '%'. $search->getRechercheProgObj() .'%' )
+ */
+            ->getQuery()
+            ->execute();
+        return ($searching);
+    }
+
+
+
+
+
+
 }
+
+

@@ -3,8 +3,29 @@
 {% block title %}Programme {% endblock %}
 
 {% block body %}
-    <h1> Liste Programme </h1>
-
+    <h1> Liste des Programmes </h1>
+    <div class=" my-4">
+        <div class="container p-4">
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.RechercheProgNom, 'Recherche Par Nom') }}
+                {{ form_widget(form.RechercheProgNom, { attr: { class: "form-control" } } ) }}
+                {{ form_errors(form.RechercheProgNom) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.RechercheProgCate, 'Recherche Par Categorie') }}
+                {{ form_widget(form.RechercheProgCate, { attr: { class: "form-control" } } ) }}
+                {{ form_errors(form.RechercheProgCate) }}
+            </div>
+           
+            <button class="btn btn-success">{{ button_label|default('Search') }}</button>
+    
+            <a href="{{path('app_programmeUser_index')}}" class="btn btn-success">Load Programmes</a>
+            {{ form_end(form) }}
+        </div>
+    
+    </div>
+    
     <table class="table" >
         <thead>
             <tr>
@@ -36,6 +57,9 @@
         {% endfor %}
         </tbody>
     </table>
-
+    <div class="navigation">
+        
+        {{ knp_pagination_render(programmes) }}
+    </div>
 
 {% endblock %}

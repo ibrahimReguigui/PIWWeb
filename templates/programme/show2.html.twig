@@ -3,6 +3,11 @@
 {% block title %}Programme{% endblock %}
 
 {% block body %}
+
+
+
+
+
     <h1>Programme</h1>
 
     <table class="table">
@@ -40,7 +45,9 @@
                 <td>{{ programme.exercices.getNbrSerie()}}</td>
             </tr>
 
-
+<tr>
+     
+</tr>
 
 
 
@@ -48,6 +55,8 @@
     </table>
 
   <a  class="btn btn-info" href="{{ path('app_programmeUser_index') }}">back to list</a>
+  <a class="btn btn-success" href="{{ path('app_pdfInvoiceprog', {'id': programme.id}) }}">Download pdf</a>
+
 
    
 

@@ -74,7 +74,7 @@ class Exercice
     private $nbrSerie;
 
     /**
-     * @ORM\OneToMany(targetEntity=programme::class, mappedBy="exercices")
+     * @ORM\OneToMany(targetEntity=Programme::class, mappedBy="exercices")
       
      */
     private $programmes;
@@ -179,6 +179,44 @@ class Exercice
         return $this;
     }
     public function __toString() {
-        return $this->nomExercice;
+        return $this->nomExercice  ;
     }
+
+
+    public function __toString2() {
+
+
+        $msg = 
+        '[+]━━━【 🏋️‍♂️ 】━━[+]  '. "\r\n" .
+        '[+]━━━【Nom Exercice 】━━[+]  '.
+        $this->getNomExercice() . "\r\n" .
+        '===================== ' ."\r\n" .
+        
+        '[+]━━━【Objectif  Exercice 】━━[+]  '.
+        $this->getDescriptionExercice() . "\r\n" .
+        '===================== ' ."\r\n".
+        
+        '[+]━━━【Categorie  Exercice 】━━[+]  '.
+        $this->getCategorieExercice() . "\r\n" .
+        '===================== ' ."\r\n".
+        
+        '[+]━━━【Nbr Repetition Exercice 】━━[+]  '.
+        $this->getNbrRepetition() . "\r\n" .
+        '===================== ' ."\r\n".
+        
+        '[+]━━━【Nbr Serie Exercice 】━━[+]  '.
+        $this->getNbrSerie() . "\r\n" .
+        '===================== ' ."\r\n"
+        
+        
+        
+        ;
+        
+        return $msg ;
+
+
+
+
+    }
+
 }

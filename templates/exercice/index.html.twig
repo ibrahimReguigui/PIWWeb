@@ -1,9 +1,38 @@
 {% extends 'base-back.html.twig' %}
 
-{% block title %}Exercice index{% endblock %}
+{% block title %}Exercice {% endblock %}
 
 {% block body %}
-    <h1 style="color: brown;"  >Exercices</h1>
+    
+
+
+<div class=" my-4">
+    <div class="container p-4">
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_label(form.RechercheNom) }}
+            {{ form_widget(form.RechercheNom, { attr: { class: "form-control" } } ) }}
+            {{ form_errors(form.RechercheNom) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.RechercheCategorie) }}
+            {{ form_widget(form.RechercheCategorie, { attr: { class: "form-control" } } ) }}
+            {{ form_errors(form.RechercheCategorie) }}
+        </div>
+        <button class="btn btn-success">{{ button_label|default('Search') }}</button>
+
+        <a href="{{path('app_exercice_index')}}" class="btn btn-success">Load Exercices</a>
+        {{ form_end(form) }}
+    </div>
+
+</div>
+
+
+
+<h1 style="color: brown;"  >Liste des Exercices</h1>
+
+    
+
 
     <table class="table">
         <thead>
@@ -50,7 +79,7 @@
 
     <div class="navigation">
         
-        {{ knp_pagination_render(exercices) }}
+{{ knp_pagination_render(exercices) }} 
     </div>
 </div>
 

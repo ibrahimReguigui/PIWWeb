@@ -131,4 +131,52 @@ class Programme
     public function __toString() {
         return $this->exercices;
     }
+
+  /*   public function __toString2() {
+        return ' ___Nom-Programme____ : ' . $this->getNomProgramme() ."\r\n"
+        .  ' ___ Objectif-Programme ___:' . $this->getObjectifProgramme() ."\r\n"
+         . '  ___Description-Programme ___ : ' . $this->getDescriptionProgramme()."\r\n"
+        . ' ___Categorie-Programme ___ : ' . $this->getCategorieProgramme()."\r\n"
+        . ' ___Exercice-Programme ___:' . $this->getExercices()
+        
+        
+        
+        ;
+    }
+ */
+public function __toString2() {
+
+$msg = 
+'[+]━━━【 🏋️‍♂️ 】━━[+]  '. "\r\n" .
+'[+]━━━【Nom Programme 】━━[+]  '.
+$this->getNomProgramme() . "\r\n" .
+'===================== ' ."\r\n" .
+
+'[+]━━━【Objectif  Programme 】━━[+]  '.
+$this->getObjectifProgramme() . "\r\n" .
+'===================== ' ."\r\n".
+
+'[+]━━━【Description  Programme 】━━[+]  '.
+$this->getDescriptionProgramme() . "\r\n" .
+'===================== ' ."\r\n".
+
+'[+]━━━【Categorie Programme 】━━[+]  '.
+$this->getCategorieProgramme() . "\r\n" .
+'===================== ' ."\r\n".
+
+'[+]━━━【Exercice Programme 】━━[+]  '.
+$this->getExercices() . "\r\n" .
+'===================== ' ."\r\n"
+
+
+
+;
+
+return $msg ;
+
+}
+
+
+
+
 }

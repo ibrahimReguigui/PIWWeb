@@ -27,12 +27,29 @@
                 <th>CategorieProgramme</th>
                 <td>{{ programme.categorieProgramme }}</td>
             </tr>
+            <tr>
+                <th>Exercice </th>
+               
+                <td>{{ programme.exercices.getNomExercice() }}</td>
+                
+             
+            </tr>
+            <tr>
+                <th>Nbr Repetition  </th>
+                <td>{{ programme.exercices.getNbrRepetition()}}</td>
+            </tr>
+            <tr>
+                <th>Nbr Serie  </th>
+                <td>{{ programme.exercices.getNbrSerie()}}</td>
+            </tr>
         </tbody>
     </table>
 
     <a class="btn btn-info" href="{{ path('app_programme_index') }}">back to list</a>
 
     <a class="btn btn-warning" href="{{ path('app_programme_edit', {'id': programme.id}) }}">edit</a>
+    <a class="btn btn-success" href="{{ path('app_pdfInvoiceprog', {'id': programme.id}) }}">Download pdf</a>
+
 
     {{ include('programme/_delete_form.html.twig') }}
 {% endblock %}

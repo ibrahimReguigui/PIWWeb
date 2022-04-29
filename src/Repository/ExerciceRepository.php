@@ -4,6 +4,7 @@ namespace App\Repository;
 use App\Entity\Exercice;
 
 use App\Entity\Programme;
+use App\Entity\RechercheExercice;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\OptimisticLockException;
@@ -83,4 +84,43 @@ class ExerciceRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+/**
+     * @return Query
+     */
+    public function findAllVisibleQuery(RechercheExercice $search)
+    {
+        //     $query = $this->findVisibleQuery();
+        //     if ($search->getMaxprice()) {
+        //         $query = $query->where('p.price <= :maxprice')
+        //             ->setParameter('maxprice', $search->getMaxprice());
+        //     }
+
+        //     return $query->getQuery();
+
+        $searching = $this->createQueryBuilder('Exercice')
+            ->andWhere('Exercice.nomExercice LIKE :searchNom')
+            ->setParameter('searchNom', '%'. $search->getRechercheNom() .'%' )
+
+            ->andWhere('Exercice.categorieExercice LIKE :searchCategorie')
+            ->setParameter('searchCategorie', '%'. $search->getRechercheCategorie() .'%' )
+
+            ->getQuery()
+            ->execute();
+        return ($searching);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
