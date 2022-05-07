@@ -1,0 +1,58 @@
+{% extends 'front/fresh-base.html.twig' %}
+{% block title %}
+    Wejden stor
+{% endblock %}
+{% block body %}
+    <div class="nk-main">
+    <div class="container">
+        <div class="nk-store">
+            <div class="row no-gutters">
+
+                {% for c in tab %}
+                    <div style="background-color: #8c8c8c" class="col-sm-6 col-lg-4">
+                        <!--start product-->
+                        <div class="nk-product">
+                            <div>
+                                <div class="nk-carousel-inner nk-popup-gallery">
+                                    <img class="nk-img-stretch" src="uploads/images/products/{{ c.image }}">
+                                </div>
+                                <h2 class="nk-product-title h5" data-mouse-parallax-z="1"><a href="#">{{ c.libelle }}</a></h2>
+                                <span class="nk-product-rating">
+        <span class="nk-product-rating-front" style="width: 50%;">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+        </span>
+        <span class="nk-product-rating-back">
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+        </span>
+    </span>
+                                <div class="nk-product-bottom">
+                                    <div>
+                                        <div class="nk-product-price">${{ c.prix }}</div>
+                                        <a  class="nk-btn nk-btn-color-white link-effect-4">Add to Cart</a>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor %}
+
+
+            </div>
+    </div>
+    </div>
+    <div class="nk-gap-2 d-none d-lg-block"></div>
+    <div class="nk-gap-2 d-none d-lg-block"></div>
+    <div class="nk-gap-2 d-none d-lg-block"></div>
+    <div class="nk-gap-2 d-none d-lg-block"></div>
+{% endblock %}

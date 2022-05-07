@@ -1,0 +1,53 @@
+{% extends 'base-back.html.twig' %}
+{% block pagetitle %}CourSalle index{% endblock%}
+{% block title %}CourSalle index{% endblock %}
+
+{% block body %}
+<div class="container rounded bg-white mt-5 mb-5" background-color="white">
+    <div class="row">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3" background-color="white">
+                </div>
+ <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>NomCour</th>
+                <th>Information</th>
+                <th>NbrActuel</th>
+                <th>NbrTotal</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cour_salle in cour_salles %}
+            <tr>
+                <td>{{ cour_salle.id }}</td>
+                <td>{{ cour_salle.nomCour }}</td>
+                <td>{{ cour_salle.information }}</td>
+                <td>{{ cour_salle.nbrActuel }}</td>
+                <td>{{ cour_salle.nbrTotal }}</td>
+                <td>{{ cour_salle.date ? cour_salle.date|date('Y-m-d') : '' }}</td>
+                <td>{{ cour_salle.tCour ? cour_salle.tCour|date('H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_cour_salle_show', {'id': cour_salle.id}) }}">show</a>
+                    <a href="{{ path('app_cour_salle_edit', {'id': cour_salle.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cour_salle_new') }}">Create new</a>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}
