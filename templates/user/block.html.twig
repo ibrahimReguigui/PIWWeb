@@ -1,0 +1,47 @@
+{% extends 'base_back.html.twig' %}
+
+
+{% block title %}Bloquer l'utilisateur{% endblock %}
+{% block body %}
+    <h1>Bloquer l'utilisateur</h1>
+<br><br>
+
+    {{ form_start(blockform,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+
+
+
+    <div style="margin-left: 0px">
+        {{ form_errors(blockform.unbloc) }}
+        {{ form_widget(blockform.unbloc,{'attr':{'class':'input100','placeholder':'Jusqu à quand ?','type':'Date'}}) }}
+        <span class="focus-input100"></span></div>
+    <br>
+
+
+    <div style="margin-left: 0px">
+        {{ form_errors(blockform.blocRaison) }}
+        {{ form_widget(blockform.blocRaison,{'attr':{'class':'input100','placeholder':'Pourquoi ?'}}) }}
+        <span class="focus-input100"></span></div>
+    <br>
+
+
+
+    <div style="margin-left: 0px">
+        {{ form_errors(blockform.captchaCod) }}
+        {{ form_widget(blockform.captchaCod,{'attr':{'class':'input100','placeholder':'Concentrez-vous'}}) }}
+        <span class="focus-input100"></span></div>
+    <br>
+
+
+    <span class="focus-input100"></span>
+    <br>
+
+
+    <button class="login100-form-btn">{{ button_label|default('Bloquer') }}</button>
+    {{ form_end(blockform) }}
+
+
+
+    <a href="{{ path('app_user_index') }}"><button style="margin-left: 0px; width: 64px" class="btn btn-sm btn-outline-info">Retour</button></a>
+    <br>
+{% endblock %}

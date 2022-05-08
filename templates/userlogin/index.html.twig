@@ -1,0 +1,51 @@
+{% extends 'base_front.html.twig' %}
+
+{% block form %}
+
+    <form  action="{{ path('app_login') }}" class="login100-form " style="margin-top: -200px">
+        <img style="width:250px;height:250px;margin-left: 100px"  src="{{ asset('frontassets/images/logo.png') }}">
+
+        <span class="login100-form-title p-b-43">
+						Connectez-vous pour continuer
+					</span>
+
+
+        <div class="wrap-input100 " >
+            <input class="input100"  id="mailAdresse" type="text" name="mailAdresse">
+            <span class="focus-input100"></span>
+            <span class="label-input100">Adresse mail</span>
+        </div>
+
+
+        <div class="wrap-input100 ">
+            <input class="input100"  id="passworde" type="password" name="passworde">
+            <span class="focus-input100"></span>
+            <span class="label-input100">Mot de passe</span>
+        </div>
+
+        <div class="flex-sb-m w-full p-t-3 p-b-32">
+
+
+            <div>
+                <a href="{{ path('app_pwdrecup') }}" class="txt1">
+                    Mot de passe oublié?
+                </a>
+            </div>
+        </div>
+
+        <div class="container-login100-form-btn">
+            <button class="login100-form-btn">
+                Connexion
+            </button>
+            <br>
+        </div>
+
+        <br>
+        <br>
+        <a style="margin-left: 380px" href="{{ path('app_user_new_inscri') }}">S'inscrire</a>
+
+
+    </form>
+
+
+{% endblock %}

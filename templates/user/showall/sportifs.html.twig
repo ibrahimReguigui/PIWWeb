@@ -1,0 +1,59 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Utilisateurs{% endblock %}
+
+{% block body %}
+    <h1><i>Tous les sportifs:</i></h1>
+    <br><br>
+    <form  action="{{ path('app_user_index') }}" >
+        <div class="form-group">
+            <input  class="form-control" style="width: 200px" id="nomuser" type="text" name="nomuser" value="" placeholder="Rechercher...">
+            <br>
+
+            <button class="btn btn-sm btn-outline-primary">
+                Rechercher
+            </button><br><br>
+        </div></form>
+
+    <table class="table" >
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Adresse</th>
+            <th>NumTel</th>
+            <th>Password</th>
+            <th>MailAdress</th>
+            <th>DateNaissance</th>
+            <th>Raison de blocage</th>
+            <th>date de déblocage</th>
+            <th>Gérer</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.adresse }}</td>
+                <td>{{ user.numTel }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.mailAdress }}</td>
+                <td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d') : '' }}</td>
+                <td>{{ user.blocRaison }}</td>
+                <td>{{ user.unbloc ? user.unbloc|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}"><button class="btn btn-sm btn-outline-primary">Détails</button></a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}"><button class="btn btn-sm btn-outline-primary">Modifier</button></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ knp_pagination_render(users) }}
+
+{% endblock %}

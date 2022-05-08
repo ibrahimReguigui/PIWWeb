@@ -1,0 +1,28 @@
+{% extends 'base_front.html.twig' %}
+
+{% block form %}
+
+    <form  action="{{ path('app_send_mail') }}" class="login100-form " style="margin-top: -200px">
+        <img style="width:250px;height:250px;margin-left: 100px"  src="{{ asset('frontassets/images/logo.png') }}">
+
+        <span class="login100-form-title p-b-43">
+						Pas de soucis !
+					</span>
+
+
+        <div class="wrap-input100 " >
+            <input class="input100"  id="mailAdresses" type="text" name="mailAdresses">
+            <span class="focus-input100"></span>
+            <span class="label-input100">Email</span>
+        </div>
+        <div class="container-login100-form-btn">
+            <button class="login100-form-btn" >
+                Récupérer
+            </button>
+            <br>
+        </div>
+    </form>
+
+
+
+{% endblock %}

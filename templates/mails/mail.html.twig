@@ -1,0 +1,8 @@
+{% block body %}
+    <h1>Voici votre mot de passe</h1>
+{% for u in user %}
+<h3>{{ u.password }}</h3>
+{% endfor %}
+    <h6>Fitnessny</h6>
+    <img src="{{ absolute_url(asset('/home/skander/Documents/symfony/Fitnessny/public/frontassets/images')) }}">
+{% endblock %}
