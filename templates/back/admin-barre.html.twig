@@ -3,6 +3,8 @@
     <nav class="navbar navbar-expand-sm navbar-default">
 
         <div class="navbar-header">
+            {% block connectedblock %}{% endblock %}
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
@@ -15,59 +17,56 @@
                 <li class="active">
                     <a href=""> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
                 </li>
-                <h3 class="menu-title"><div class=""><a><i class="fa fa-users"></i>              Users</a></div></h3><!-- /.menu-title -->
-                <a href=""> <i class="menu-icon fa fa-dashboard"></i>Collaborators </a>
+                <h3 class="menu-title"><div class=""><a>     Utilisateurs</a></div></h3><!-- /.menu-title -->
                 </li>
 
-
-
-                <h3 class="menu-title"><div class=""><a><i class="fa fa-tasks"></i>              products</a></div></h3>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Produits</a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-users"></i> Coaches</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-fort-awesome"></i><a href="font-fontawesome.html">Font Awesome</a></li>
-                        <li><i class="menu-icon ti-themify-logo"></i><a href="font-themify.html">Themefy Icons</a></li>
-                    </ul>
-                </li>
-                <li>
-                </li>
-                <li class="menu-item-has-children dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Coaches</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-line-chart"></i><a href=" ">New Coaches</a></li>
+                        <li><i ></i><a href="{{ path('app_user_new') }}">Nouveau </a></li>
+                        <li><i ></i><a href="{{ path('app_coaches') }}">Tous </a></li>
 
                     </ul>
                 </li>
+
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Lessons</a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-users"></i> Sportifs</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-th"></i><a href=" ">New Lessons</a></li>
+                        <li><i ></i><a href="{{ path('app_user_new_sporitf') }}">Nouveau </a></li>
+                        <li><i ></i><a href="{{ path('app_sportifs') }}">Tous </a></li>
 
                     </ul>
                 </li>
-                </li>
+
                 <li class="menu-item-has-children dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Régimes</a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-users"></i> Admins</a>
                     <ul class="sub-menu children dropdown-menu">
+                        <li><i ></i><a href="{{ path('app_user_new_admin') }}">Nouveau </a></li>
+                        <li><i ></i><a href="{{ path('app_admins') }}">Tous </a></li>
 
                     </ul>
                 </li>
+
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Leçons</a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-users"></i> Gérants</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-th"></i><a href="forms-basic.html">Basic Form</a></li>
-                        <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
+                        <li><i ></i><a href="{{ path('app_user_new_gerant') }}">Nouveau </a></li>
+                        <li><i ></i><a href="{{ path('app_gérants') }}">Tous </a></li>
+
                     </ul>
                 </li>
 
-                <h3 class="menu-title">Stock</h3><!-- /.menu-title -->
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-area-chart"></i>Stock</a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-users"></i> Tous</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-map-o"></i><a href="maps-gmap.html">Google Maps</a></li>
-                        <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Vector Maps</a></li>
+
+                        <li><i ></i><a href="{{ path('app_user_index') }}">Tous </a></li>
+
                     </ul>
                 </li>
+
+
+
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>

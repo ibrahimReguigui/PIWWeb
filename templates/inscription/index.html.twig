@@ -1,0 +1,95 @@
+{% extends 'base_front.html.twig' %}
+
+{% block form %}
+    <div class="login100-form " style="margin-top: -200px" >
+        <img style="width:250px;height:250px;margin-left: 100px"  src="{{ asset('frontassets/images/logo.png') }}">
+
+        <span class="login100-form-title p-b-43">
+						Merci de vous inscrire
+					</span>
+
+
+        {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+        <div class="wrap-input100 " >
+            {{ form_errors(form.nom) }}
+            {{ form_widget(form.nom,{'attr':{'class':'input100','placeholder':'Nom'}}) }}
+            <span class="focus-input100"></span>
+        </div><br>
+        <div class="wrap-input100 " >
+            {{ form_widget(form.prenom,{'attr':{'class':'input100','placeholder':'Prénom'}}) }}
+            <span class="focus-input100"></span>
+        </div><br>
+
+        <div class="wrap-input100 " >
+            {{ form_errors(form.adresse) }}
+            {{ form_widget(form.adresse,{'attr':{'class':'input100','placeholder':'Adresse'}}) }}
+            <span class="focus-input100"></span>
+        </div>
+        <br>
+        <div class="wrap-input100 " >
+            {{ form_errors(form.numTel) }}
+            {{ form_widget(form.numTel,{'attr':{'class':'input100','placeholder':'Num° Téléphone'}}) }}
+            <span class="focus-input100"></span>
+        </div>
+        <br>
+        <div class="wrap-input100 " >
+            {{ form_errors(form.password) }}
+            {{ form_widget(form.password,{'attr':{'class':'input100','placeholder':'Mot de passe'}}) }}
+            <span class="focus-input100"></span>
+        </div>
+        <br>
+        <div class="wrap-input100 " >
+            {{ form_errors(form.mailAdress) }}
+            {{ form_widget(form.mailAdress,{'attr':{'class':'input100','placeholder':'Adresse mail'}}) }}
+            <span class="focus-input100"></span>
+        </div>
+        <br>
+
+        <br>
+        <div style="margin-left: 0px">
+            {{ form_widget(form.dateNaissance,{'attr':{'class':'input100','placeholder':'Date de naissance'}}) }}
+            <span class="focus-input100"></span></div>
+        <br><br>
+        <div style="margin-left: 0px">
+            {{ form_errors(form.whoami) }}
+            {{ form_widget(form.whoami,{'attr':{'class':'input100','placeholder':'Qui êtes-vous?'}}) }}
+            <span class="focus-input100"></span></div>
+        <br><br>
+        {{ form_errors(form.captchaCode) }}
+        {{ form_widget(form.captchaCode,{'attr':{'class':'input100','placeholder':'Concentrez-vous ...'}}) }}
+<br><br>
+        <div style="margin-left: 0px">
+            {% if true %}
+                {% do form.blocRaison.setRendered() %}
+            {% endif %}
+            <span class="focus-input100"></span></div>
+
+
+        <div style="margin-left: 0px">
+            {% if true %}
+                {% do form.blocRaison.setRendered() %}
+            {% endif %}
+            <span class="focus-input100"></span></div>
+
+        <div style="margin-left: 0px">
+            {% if true %}
+                {% do form.unbloc.setRendered() %}
+            {% endif %}
+            <span class="focus-input100"></span></div>
+
+
+
+        <button class="login100-form-btn">{{ button_label|default('Créer') }}</button>
+        {{ form_end(form) }}
+
+
+        <br>
+        <a style="margin-left: 350px" href="{{ path('app_userlogin') }}">Se connecter</a>
+
+
+    </div>
+
+
+{% endblock %}
+

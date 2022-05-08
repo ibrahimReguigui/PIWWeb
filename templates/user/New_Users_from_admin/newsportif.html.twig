@@ -1,0 +1,90 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Sportif{% endblock %}
+
+{% block body %}
+    <h1>Nouveau sportif :</h1>
+    <br>
+
+
+    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+    <div class="wrap-input100 " >
+        {{ form_errors(form.nom) }}
+        {{ form_widget(form.nom,{'attr':{'class':'input100','placeholder':'Nom'}}) }}
+        <span class="focus-input100"></span>
+    </div>
+    <div class="wrap-input100 " >
+        {{ form_widget(form.prenom,{'attr':{'class':'input100','placeholder':'Prénom'}}) }}
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 " >
+        {{ form_errors(form.adresse) }}
+        {{ form_widget(form.adresse,{'attr':{'class':'input100','placeholder':'Adresse'}}) }}
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 " >
+        {{ form_errors(form.numTel) }}
+        {{ form_widget(form.numTel,{'attr':{'class':'input100','placeholder':'Num° Téléphone'}}) }}
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 " >
+        {{ form_errors(form.password) }}
+        {{ form_widget(form.password,{'attr':{'class':'input100','placeholder':'Mot de passe'}}) }}
+        <span class="focus-input100"></span>
+    </div>
+
+    <div class="wrap-input100 " >
+        {{ form_errors(form.mailAdress) }}
+        {{ form_widget(form.mailAdress,{'attr':{'class':'input100','placeholder':'Adresse mail'}}) }}
+        <span class="focus-input100"></span>
+    </div>
+
+
+    <br>
+    <div style="margin-left: 0px">
+        {{ form_widget(form.dateNaissance,{'attr':{'class':'input100','placeholder':'Date de naissance'}}) }}
+        <span class="focus-input100"></span></div>
+    <br>
+    <div style="margin-left: 0px">
+        {{ form_errors(form.whoami) }}
+        {{ form_widget(form.whoami,{'attr':{'class':'input100','placeholder':'whoami','value':'Sportif'}}) }}
+        <span class="focus-input100"></span></div>
+    <br>
+
+
+    <div style="margin-left: 0px">
+        {% if true %}
+            {% do form.blocRaison.setRendered() %}
+        {% endif %}
+        <span class="focus-input100"></span></div>
+
+
+    <div style="margin-left: 0px">
+        {% if true %}
+            {% do form.blocRaison.setRendered() %}
+        {% endif %}
+        <span class="focus-input100"></span></div>
+
+    <div style="margin-left: 0px">
+        {% if true %}
+            {% do form.unbloc.setRendered() %}
+        {% endif %}
+        <span class="focus-input100"></span></div>
+    {% if true %}
+        {% do form.captchaCode.setRendered() %}
+    {% endif %}
+    <span class="focus-input100"></span>
+
+    <br>
+
+
+    <button class="login100-form-btn">{{ button_label|default('Créer') }}</button>
+    {{ form_end(form) }}
+
+
+
+{% endblock %}

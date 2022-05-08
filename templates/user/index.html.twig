@@ -1,0 +1,82 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+    <h1><i>Tous les utilisateurs</i></h1>
+    <br>
+    <br>
+
+    <form  action="{{ path('app_user_index') }}" >
+        <div class="form-group">
+        <input  class="form-control" style="width: 200px" id="nomuser" type="text" name="nomuser" value="" placeholder="Rechercher...">
+        <br>
+
+        <button class="btn btn-sm btn-outline-primary">
+            Rechercher
+        </button><br><br>
+        </div></form>
+
+
+    <table class="table" >
+        <thead>
+            <tr>
+                <th></th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Adresse</th>
+                <th>N°Téléphone</th>
+                <th>Adresse mail</th>
+                <th>Date de Naissance</th>
+                <th>Rôle</th>
+                <th>Raison de blocage</th>
+                <th>Déblocage</th>
+                <th>Gérer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td><img src="{{ asset('uploads/images/754a8b704091f9c49d13afe88447eb55.jpeg' )}}" alt="" style="width: 80px;height: 80px"></td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.adresse }}</td>
+                <td>{{ user.numTel }}</td>
+                <td>{{ user.mailAdress }}</td>
+                <td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d') : '' }}</td>
+                <td>{{ user.whoami }}</td>
+                <td>{{ user.blocRaison }}</td>
+                <td>{{ user.unbloc ? user.unbloc|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}"><button class="btn btn-sm btn-outline-info">Détails</button></a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}"><button class="btn btn-sm btn-outline-primary">Modifier</button></a>
+                    <a href="{{ path('app_user_block', {'id': user.id}) }}"><button class="btn btn-sm btn-outline-danger">Bloquer</button></a>
+                    <a href="{{ path('app_user_signal', {'id': user.id}) }}"><button class="btn btn-sm btn-outline-warning">Signaler</button></a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        <br>
+        </tbody>
+
+    </table>
+    {{ knp_pagination_render(users) }}
+
+    <br>
+    <br>
+
+
+
+{% endblock %}
+
+                    {% block connectedblock %}
+
+                        <h4> {{ connected.nom }} {{ connected.prenom }}</h4>
+                        <p><i> connecté en tant que <b>{{ connected.whoami }}</b></i></p>
+
+
+                    {% endblock %}
