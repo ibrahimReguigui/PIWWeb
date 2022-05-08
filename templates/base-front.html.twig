@@ -25,9 +25,19 @@
     <link rel="stylesheet" href="{{ asset('css/test.css')}}" >
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
+
 </head>
 
 <body>
+<!-- Flashy depends on jQuery -->
+<script src="//code.jquery.com/jquery.js"></script>
+<!-- Load Flashy default JavaScript -->
+<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+<!-- Include Flashy default partial -->
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
 <!-- Page Preloder -->
 <div id="preloder">
     <div class="loader"></div>
@@ -60,21 +70,20 @@
 
 
 {% for message in app.flashes('failure') %}
-    <div class="alert alert-success" style="background-color:#b2c2bf;text-align: center">
+    <div class="alert alert-success" style="background-color:#b2c2bf;text-align: center;}">
+
         {{ message }}
     </div>
 {% endfor %}
 {% for message in app.flashes('success') %}
-    <div class="alert alert-success" style="text-align: center">
+    <div class="alert alert-success" style="text-align: center;">
         {{ message }}
     </div>
 {% endfor %}
 
 
 <!-- ChoseUs Section Begin -->
-<section class="choseus-section spad" style="background-color:white;text-align:center" >
-    <div class="container">
-        {% block body %}
+    {% block body %}
         {% endblock %}
 
     </div>

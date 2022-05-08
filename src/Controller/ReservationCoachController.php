@@ -9,6 +9,8 @@ use App\Form\ReservationCoachType;
 use App\Repository\DisponibiliteCoachRepository;
 use App\Repository\ReservationCoachRepository;
 use App\Repository\UtilisateurRepository;
+use MercurySeries\FlashyBundle\FlashyNotifier;
+use Swift_Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,10 +32,11 @@ class ReservationCoachController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/reserver/{idCoach}/{idDisponibilite}", name="app_reservation_coach_reserver", methods={"GET"})
      */
-    public function reserver($idDisponibilite,$idCoach,ReservationCoachRepository $reservationCoachRepository,UtilisateurRepository $utilisateurRepository,
+    public function reserver(FlashyNotifier $flashy,$idDisponibilite,$idCoach,ReservationCoachRepository $reservationCoachRepository,UtilisateurRepository $utilisateurRepository,
                              DisponibiliteCoachRepository $disponibiliteCoachRepository): Response
     {   $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(Utilisateur::class)->find(6);
@@ -47,18 +50,17 @@ class ReservationCoachController extends AbstractController
             $reservation=new ReservationCoach();
             $reservation->setIdCoach($coach);
             $reservation->setIdParticipant($user);
-
             $reservation->setDate($disponibilite->getDate());
             $reservation->setTime($disponibilite->getTime());
             $reservation->setEtat('En Attente');
 
             $em->persist($reservation);
             $em->flush();
-            $this->addFlash('success', 'Reservation Ajoutée !!!');
+            $flashy->success('Reservation Ajoutée !!!');
             return $this->redirectToRoute('app_reservation_coach_reservation');
         }
         else{
-            $this->addFlash('failure', 'Vous Avez Deja Reservée Dans Ce Cour !!!');
+            $flashy->error('Vous Avez Deja Reservée Dans Ce Cour !!!');
             return $this->redirectToRoute('app_reservation_coach_disponibilite');
         }
 
@@ -79,14 +81,26 @@ class ReservationCoachController extends AbstractController
     /**
      * @Route("/reservation/annuler/{id}", name="app_reservation_coach_annuler")
      */
-    public function annulerReservation(ReservationCoachRepository $reservationCoachRepository,$id): Response
+    public function annulerReservation(FlashyNotifier $flashy,ReservationCoachRepository $reservationCoachRepository,$id, Swift_Mailer $mailer): Response
     {
-
         $reservation=$reservationCoachRepository->find($id);
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($reservation);
-        $em->flush();
-
+        if ($reservation->getEtat()=='Acceptée'){
+            $message=(new \Swift_Message('Reservation Annulée'));
+            $message->setFrom("ibrahim.reguigui@esprit.tn");
+            $message->setTo($reservation->getIdParticipant()->getAdresseMail());
+            $img=$message->embed(\Swift_Image::fromPath('logo.png'));
+            $message->setBody($this->renderView('Mail/annulationReservationParSportif.html.twig',['reservation'=>$reservation,'img'=>$img]),'text/html');
+            $mailer->send($message);
+            $flashy->success( 'Reservation Annulée Et Mail envoyée !!');
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($reservation);
+            $em->flush();
+        }else{
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($reservation);
+            $em->flush();
+            $flashy->info( 'Reservation Annulée !!');
+        }
         return $this->redirectToRoute('app_reservation_coach_reservation');
     }
 

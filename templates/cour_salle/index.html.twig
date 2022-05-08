@@ -1,23 +1,33 @@
 {% extends 'base-back.html.twig' %}
 {% block titreGauche %}Salle > Liste Cours{% endblock %}
-{% block titreDroite %}Salle3{% endblock %}
+{% block titreDroite %}Salle1{% endblock %}
 {% block body %}
-
- <table class="table table-bordered bg-white mt-5 mb-5">
+ <table class="table table-bordered bg-white mt-5 mb-5" style="background-color:black">
         <thead class="thead-dark">
             <tr>
 
-                <th>NomCour</th>
-                <th>Information</th>
-                <th>NbrActuel</th>
-                <th>NbrTotal</th>
-                <th>Date</th>
-                <th>Time</th>
+                <th><a href="{{ path('app_cour_salle_index_trie', {'trie':'ASC','by':'c.nomCour'}) }}">
+                        ↑ </a> NomCour<a href="{{ path('app_cour_salle_index_trie', {'trie':'DESC','by':'c.nomCour'}) }}">
+                        ↓ </a></th>
+                <th> Information</th>
+                <th><a href="{{ path('app_cour_salle_index_trie', {'trie':'ASC','by':'c.nbrActuel'}) }}">
+                        ↑ </a> NbrActuel<a href="{{ path('app_cour_salle_index_trie', {'trie':'DESC','by':'c.nbrActuel'}) }}">
+                        ↓ </a></th>
+                <th><a href="{{ path('app_cour_salle_index_trie', {'trie':'ASC','by':'c.nbrTotal'}) }}">
+                        ↑ </a> NbrTotal<a href="{{ path('app_cour_salle_index_trie', {'trie':'DESC','by':'c.nbrTotal'}) }}">
+                        ↓ </a></th>
+                <th><a href="{{ path('app_cour_salle_index_trie', {'trie':'ASC','by':'c.date'}) }}">
+                        ↑ </a> Date<a href="{{ path('app_cour_salle_index_trie', {'trie':'DESC','by':'c.date'}) }}">
+                        ↓ </a></th>
+                <th><a href="{{ path('app_cour_salle_index_trie', {'trie':'ASC','by':'c.tCour'}) }}">
+                        ↑ </a> Time<a href="{{ path('app_cour_salle_index_trie', {'trie':'DESC','by':'c.tCour'}) }}">
+                        ↓ </a></th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for cour_salle in cour_salles %}
+
             <tr>
 
                 <td>{{ cour_salle.nomCour }}</td>
@@ -37,10 +47,19 @@
             </tr>
         {% endfor %}
         </tbody>
-    </table>
 
+    </table>
+    <div class="d-flex justify-content-center">
+        {{ knp_pagination_render(cour_salles,'Pagination/pagination.html.twig') }}
+    </div >
+    <div style="display:flex;justify-content:space-around;">
+        <form  action="{{ path('listePdfDownload',{'id': cour_salles[0].Utilisateur.id,'boolean':'true','trie':trie,'by':by}) }}"><button>Telecharger</button></form>
+        <form  action="{{ path('listePdf',{'id': cour_salles[0].Utilisateur.id,'boolean':'false','trie':trie,'by':by}) }}"><button>Imprimer</button></form>
+        <form  action="{{ path('ListePDFParMail',{'id': cour_salles[0].Utilisateur.id,'trie':trie,'by':by}) }}"><button>Recevoir Par Mail</button></form>
+    </div>
 
             </div>
         </div>
+
 
 {% endblock %}

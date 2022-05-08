@@ -1,7 +1,7 @@
 {% extends 'base-back.html.twig' %}
 
 {% block title %}Salle > Cour > Examiner{% endblock %}
-{% block titreDroite %}Salle3{% endblock %}
+{% block titreDroite %}Salle1{% endblock %}
 {% block body %}
 
 <h1>Cour</h1>
@@ -51,6 +51,12 @@
                 <tr>
 
                     <td>{{ r.idSportif.nom }}</td>
+
+                </tr>
+                 {% else %}
+                <tr>
+
+                    <td>Aucun Participant</td>
 
                 </tr>
             {% endfor %}

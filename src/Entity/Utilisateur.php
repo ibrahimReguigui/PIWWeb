@@ -69,6 +69,11 @@ class Utilisateur
      */
     private $reservationCoachCoach;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adresseMail;
+
 
     public function __construct()
     {
@@ -349,6 +354,18 @@ class Utilisateur
                 $reservationCoachCoach->setIdCoach(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAdresseMail(): ?string
+    {
+        return $this->adresseMail;
+    }
+
+    public function setAdresseMail(string $adresseMail): self
+    {
+        $this->adresseMail = $adresseMail;
 
         return $this;
     }

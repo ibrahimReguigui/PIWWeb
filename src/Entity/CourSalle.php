@@ -6,6 +6,7 @@ use App\Repository\CourSalleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=CourSalleRepository::class)
@@ -16,22 +17,26 @@ class CourSalle
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotNull(message="Nom ne peut pas etre vide")
+     * @Groups("post:read")
      */
     private $nomCour;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("post:read")
      */
     private $information;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $nbrActuel;
 
@@ -39,6 +44,7 @@ class CourSalle
      * @ORM\Column(type="integer")
      * @Assert\NotNull(message="Nombre de participant ne peut pas etre vide")
      * @Assert\GreaterThan(0,message="Nombre doit etre superieure a zero")
+     * @Groups("post:read")
      */
     private $nbrTotal;
 
@@ -46,12 +52,14 @@ class CourSalle
      * @ORM\Column(type="date")
      * @Assert\NotNull
      * @Assert\GreaterThan("today",message="Date doit etre superieure a celle d'aujourdhui")
+     * @Groups("post:read")
      */
     private $date;
 
     /**
      * @ORM\Column(type="time")
      * @Assert\NotNull
+     * @Groups("post:read")
      */
     private $tCour;
 

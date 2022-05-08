@@ -6,6 +6,7 @@ use App\Entity\DisponibiliteCoach;
 use App\Entity\Utilisateur;
 use App\Form\DisponibiliteCoachType;
 use App\Repository\DisponibiliteCoachRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,13 +20,26 @@ class DisponibiliteCoachController extends AbstractController
     /**
      * @Route("/", name="app_disponibilite_coach_index", methods={"GET"})
      */
-    public function index(DisponibiliteCoachRepository $disponibiliteCoachRepository): Response
+    public function index(DisponibiliteCoachRepository $disponibiliteCoachRepository,PaginatorInterface $paginator,Request $request): Response
     {   $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(Utilisateur::class)->find(10);
-
+        $disponibilite_coaches=$disponibiliteCoachRepository->findBy(['idCoach'=>$user->getId()]);
+        $disponibilite_coaches=$paginator->paginate($disponibilite_coaches,$request->query->getInt('page',1),4 );
         return $this->render('disponibilite_coach/index.html.twig', [
-            'disponibilite_coaches' => $disponibiliteCoachRepository->findBy(['idCoach'=>$user->getId()]),
-        ]);
+            'disponibilite_coaches' => $disponibilite_coaches])
+        ;
+    }
+    /**
+     * @Route("/{Ttrie}/{By}", name="app_disponibilite_coach_index_trie", methods={"GET"})
+     */
+    public function indexTrie($By,$Ttrie,DisponibiliteCoachRepository $disponibiliteCoachRepository,PaginatorInterface $paginator,Request $request): Response
+    {   $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(Utilisateur::class)->find(10);
+        $disponibilite_coaches=$disponibiliteCoachRepository->findByTrie($By,$Ttrie,['idCoach'=>$user->getId()]);
+        $disponibilite_coaches=$paginator->paginate($disponibilite_coaches,$request->query->getInt('page',1),4 );
+        return $this->render('disponibilite_coach/index.html.twig', [
+            'disponibilite_coaches' => $disponibilite_coaches])
+            ;
     }
 
     /**

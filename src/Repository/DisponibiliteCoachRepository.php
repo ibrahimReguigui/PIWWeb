@@ -73,4 +73,14 @@ class DisponibiliteCoachRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findByTrie($By,$Ttrie,$idCoach)
+    {
+        return $this->createQueryBuilder('d')
+            ->where('d.idCoach=:idCoach')
+            ->orderBy($By, $Ttrie)
+            ->setParameter('idCoach', $idCoach)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

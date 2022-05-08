@@ -6,41 +6,48 @@
 {% block pagetitle2 %}Mon Planning{% endblock %}
 {% block body %}
 
-    <table class="table table-bordered bg-white mt-5 mb-5">
-        <thead class="thead-dark">
-        <tr>
 
-            <th>NomSalle</th>
-            <th>NomCour</th>
-            <th>Information</th>
-            <th>NbrActuel</th>
-            <th>NbrTotal</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Annuler</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for reservation_cour_salle in reservation_cour_salles %}
-            <tr>
+<section class="choseus-section spad" style="background-color:white;text-align:center" >
 
-                <td>{{ reservation_cour_salle.idSalle.nom }}</td>
-                <td>{{ reservation_cour_salle.idCour.nomCour }}</td>
-                <td>{{ reservation_cour_salle.idCour.information }}</td>
-                <td>{{ reservation_cour_salle.idCour.nbrActuel }}</td>
-                <td>{{ reservation_cour_salle.idCour.nbrTotal }}</td>
-                <td>{{ reservation_cour_salle.idCour.date ? reservation_cour_salle.idCour.date|date('Y-m-d') : '' }}</td>
-                <td>{{ reservation_cour_salle.idCour.tCour ? reservation_cour_salle.idCour.tCour|date('H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_reservation_cour_salle_delete',{'id':reservation_cour_salle.id}) }}">Annuler</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container">
 
+        <section class="pricing-section spad">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-title">
+                            <span>Salles</span>
+                            <h2>Liste Reservation</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    {% for reservation_cour_salle in reservation_cour_salles %}
+                        <div class="col-lg-4 col-md-8">
+                            <div class="ps-item">
+                                <h3>{{ reservation_cour_salle.idSalle.nom }}</h3>
+                                <div class="pi-price">
+                                    <h2>{{ reservation_cour_salle.idCour.nomCour }}</h2>
+                                    <span>{{ reservation_cour_salle.idCour.information }}</span>
+                                </div>
+                                <ul>
+                                    <li>Participants : {{ reservation_cour_salle.idCour.nbrActuel }} / {{ reservation_cour_salle.idCour.nbrTotal }}</li>
+                                    <li>{{ reservation_cour_salle.idCour.date ? reservation_cour_salle.idCour.date|date('Y-m-d') : '' }}</li>
+                                    <li>{{ reservation_cour_salle.idCour.tCour ? reservation_cour_salle.idCour.tCour|date('H:i:s') : '' }}</li>
+
+                                </ul>
+                                <a  class="primary-btn pricing-btn" href="{{ path('app_reservation_cour_salle_delete',{'id':reservation_cour_salle.id}) }}">Annuler</a></div>
+                        </div>
+                    {% else %}
+                        <div class="ps-item">
+                            <div class="pi-price">
+                                <h2>Aucunne Reservation effectuée</h2>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </section>
 {% endblock %}

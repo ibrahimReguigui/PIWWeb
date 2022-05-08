@@ -87,4 +87,25 @@ class ReservationCoachRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function etat($idCoach,$status){
+        return $this->createQueryBuilder('r')
+            ->where('r.idCoach =:id')
+            ->andWhere('r.etat LIKE :status')
+            ->setParameter('id', $idCoach)
+            ->setParameter('status', $status)
+            ->getQuery()
+            ->getResult();
+    }
+    public function countR($idCoach,$etat){
+        return $this->createQueryBuilder('r')
+            ->select('count(r.idCoach)')
+            ->where('r.idCoach =:id')
+            ->andWhere('r.etat LIKE :status')
+            ->setParameter('id', $idCoach)
+            ->setParameter('status', $etat)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+    }
+
 }
