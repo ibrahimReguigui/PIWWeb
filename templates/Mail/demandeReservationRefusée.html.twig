@@ -1,0 +1,16 @@
+<body style="
+background-image:url(https://www.hdwallpaper.nu/wp-content/uploads/2018/02/weightlifting-20-1024x661.jpg);
+ background-repeat: no-repeat; background-position: top center;
+background-size: auto 120%; text-align: center; ">
+
+    <img style="width: 100%;display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;" src="https://i.ibb.co/RvTSH0y/logo.png">
+
+    <p style="text-align: center;font-weight: 800;color:white;font-family: cursive;font-style: italic;font-size: 2.5em;">Bienvenue {{ reservation.idParticipant.nom }}</p>
+    <p style="text-align: center;font-weight: 800;color:white;font-family: cursive;font-style: italic;font-size: 2.5em;">Nous sommes desolé de vous informer que votre demande du {{ reservation.date.format('Y-m-d')}}
+        a l'heure {{ reservation.time.format('H:i:s') }} avec le coach {{ reservation.idCoach.nom}} a été refusée</p>
+    <p style="text-align: center;font-weight: 800;color:white;font-family: cursive;font-style: italic;font-size: 2.5em;">Merci d'avoir utilisé notre site</p>
+</body>
+

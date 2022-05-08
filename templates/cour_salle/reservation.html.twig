@@ -1,0 +1,38 @@
+{% extends 'base-back.html.twig' %}
+
+{% block titreGauche %}Salle > Reservations{% endblock %}
+{% block titreDroite %}Salle1{% endblock %}
+
+{% block body %}
+
+    <table class="table table-bordered bg-white mt-5 mb-5">
+        <tbody>
+        <tr class="thead-dark">
+
+            <th>Paricipant</th>
+            <th>Nom Cour</th>
+            <th>Date</th>
+            <th>Heure</th>
+            <th>Action</th>
+        </tr>
+        {% for r in reservation %}
+            <tr>
+
+                <td>{{ r.idSportif.nom }}</td>
+                <td>{{ r.idCour.nomCour }}</td>
+                <td>{{ r.idCour.date|date('d/m/y') }}</td>
+                <td>{{ r.idCour.tCour|date('H:i:s') }}</td>
+                <td><a href="{{ path('app_cour_salle_delete_reservation', {'id': r.id}) }}) }}">Annuler</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Données Inexistantes</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+        {{ knp_pagination_render(reservation,'Pagination/pagination.html.twig') }}
+    </div>
+{% endblock %}

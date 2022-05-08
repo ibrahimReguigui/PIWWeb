@@ -1,0 +1,57 @@
+<body style=" background-size: auto 100%;;background: no-repeat;background-image:url(img5.jpg)">
+<img style="width: 100%;" src="logo.png" />
+<div >
+
+
+    <h1 style="text-align:center;color:#96ceb4;font-family: cursive;font-style: italic;">Liste Cours {{ salle.nom }}</h1>
+
+
+    <table class="table table-bordered bg-white mt-5 mb-5" style="color:white;text-align:center
+    ;border:1px solid;border-collapse: collapse;
+    width:90%;margin: auto;">
+        <thead class="thead-dark"style="border:1px solid">
+        <tr>
+
+            <th style="border:1px solid">NomCour</th>
+            <th style="border:1px solid">Information</th>
+            <th style="border:1px solid">NbrActuel</th>
+            <th style="border:1px solid">NbrTotal</th>
+            <th style="border:1px solid">Date</th>
+            <th style="border:1px solid">Time</th>
+        </tr>
+        </thead>
+        <tbody style="border:1px solid">
+        {% for cour_salle in cour_salles %}
+            <tr style="border:1px solid">
+
+                <td style="border:1px solid">{{ cour_salle.nomCour }}</td>
+                <td style="border:1px solid">{{ cour_salle.information }}</td>
+                <td style="border:1px solid">{{ cour_salle.nbrActuel }}</td>
+                <td style="border:1px solid">{{ cour_salle.nbrTotal }}</td>
+                <td style="border:1px solid">{{ cour_salle.date ? cour_salle.date|date('Y-m-d') : '' }}</td>
+                <td style="border:1px solid">{{ cour_salle.tCour ? cour_salle.tCour|date('H:i:s') : '' }}</td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Données Inexistantes</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+</div>
+<div>
+
+    <p style="float: right; width: 260px;color:white;">Date : {{ "now"|date('Y-m-d') }} Heure : {{ "now"|date('H:i:s') }}</p>
+
+</div>
+
+</div>
+<footer style="position: absolute; bottom: 0; right: 0;color:white;">
+    Fitnessni PageWeb/Mobile/DesktopApp
+</footer>
+
+
+</body>
