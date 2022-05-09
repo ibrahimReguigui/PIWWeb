@@ -10,6 +10,8 @@ use App\Form\CourSalleType;
 use App\Metiers\calculsMetier;
 use App\Repository\CaracteristiquesportifRepository;
 use App\Repository\CourSalleRepository;
+use App\Repository\PlatRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,10 +25,12 @@ class CaracController extends AbstractController
     public function index(CaracteristiquesportifRepository $csr): Response
     {
         return $this->render('carac/index.html.twig', [
-                'carac' => $csr->findById(31),
+                'carac' => $csr->findById(33),
             ]);
 
     }
+
+
 
 
     /**
