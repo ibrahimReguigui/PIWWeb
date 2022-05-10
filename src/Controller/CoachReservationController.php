@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Utilisateur;
+use App\Entity\User;
 use App\Repository\DisponibiliteCoachRepository;
 use App\Repository\ReservationCoachRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -23,8 +23,9 @@ class CoachReservationController extends AbstractController
      * @Route("/traiter", name="app_coach_reservation_traiter")
      */
     public function reservation(ReservationCoachRepository $reservationCoachRepository,PaginatorInterface $paginator,Request $request): Response
-    {   $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(Utilisateur::class)->find(10);
+    {
+        $user=new User($this->getUser());
+
         $countA=$reservationCoachRepository->countR($user->getId(),'Acceptée');
         $countB=$reservationCoachRepository->countR($user->getId(),'En_Attente');
         $reservation=$reservationCoachRepository->findBy(['idCoach'=>($user->getId())]);
@@ -39,7 +40,7 @@ class CoachReservationController extends AbstractController
      */
     public function reservationFiltrer(ReservationCoachRepository $reservationCoachRepository,PaginatorInterface $paginator,Request $request): Response
     {   $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(Utilisateur::class)->find(10);
+        $user = $em->getRepository(User::class)->find(10);
         $countA=$reservationCoachRepository->countR($user->getId(),'Acceptée');
         $countB=$reservationCoachRepository->countR($user->getId(),'En_Attente');
         $En_Attente=$request->get('En_Attente');
@@ -70,7 +71,7 @@ class CoachReservationController extends AbstractController
      */
     public function accepterReservation( Swift_Mailer $mailer,DisponibiliteCoachRepository $disponibiliteCoachRepository,ReservationCoachRepository $reservationCoachRepository,$id): Response
     {   $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(Utilisateur::class)->find(10);
+        $user = $em->getRepository(User::class)->find(10);
 
         $reservation=$reservationCoachRepository->find($id);
         $reservation->setEtat('Acceptée');

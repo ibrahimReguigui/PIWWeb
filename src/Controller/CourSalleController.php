@@ -4,11 +4,11 @@ namespace App\Controller;
 
 use App\Entity\CourSalle;
 use App\Entity\ReservationCourSalle;
-use App\Entity\Utilisateur;
+use App\Entity\User;
 use App\Form\CourSalleType;
 use App\Repository\CourSalleRepository;
 use App\Repository\ReservationCourSalleRepository;
-use App\Repository\UtilisateurRepository;
+use App\Repository\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Swift_Attachment;
 use Swift_Mailer;
@@ -69,7 +69,7 @@ class CourSalleController extends AbstractController
     /**
      * @Route("/ListePDF/{id}/{by}/{trie}", name="listePdf" , methods={"GET"})
      */
-    public function listePdf($by,$trie,UtilisateurRepository $utilisateurRepository,CourSalleRepository $courSalleRepository,$id)
+    public function listePdf($by,$trie,UserRepository $Userepository,CourSalleRepository $courSalleRepository,$id)
     {
         $cour_salles=$courSalleRepository->findSalleTrie((int)$id,$trie,$by);
 
@@ -79,7 +79,7 @@ class CourSalleController extends AbstractController
         $dompdf = new Dompdf($options);
 
 
-        $salle=$utilisateurRepository->find($id);
+        $salle=$UserRepository->find($id);
         // Retrieve the HTML generated in our twig file
         $html = $this->renderView('cour_salle/ListePDF.html.twig', [
             'cour_salles' =>$cour_salles ,'salle'=>$salle
@@ -105,7 +105,7 @@ class CourSalleController extends AbstractController
     /**
      * @Route("/listePdfDownload/{id}/{by}/{trie}", name="listePdfDownload")
      */
-    public function listePdfDownload($by,$trie,UtilisateurRepository $utilisateurRepository,CourSalleRepository $courSalleRepository,$id)
+    public function listePdfDownload($by,$trie,UserRepository $UserRepository,CourSalleRepository $courSalleRepository,$id)
     {
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -113,7 +113,7 @@ class CourSalleController extends AbstractController
 
         // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
-        $salle=$utilisateurRepository->find($id);
+        $salle=$UserRepository->find($id);
 
         $cour_salles=$courSalleRepository->findSalleTrie((int)$id,$trie,$by);;
 
@@ -143,7 +143,7 @@ class CourSalleController extends AbstractController
     /**
      * @Route("/ListePDFParMail/{id}/{by}/{trie}", name="ListePDFParMail")
      */
-    public function listePdfParMail($by,$trie,CourSalleRepository $courSalleRepository,$id, Swift_Mailer $mailer,UtilisateurRepository $utilisateurRepository)
+    public function listePdfParMail($by,$trie,CourSalleRepository $courSalleRepository,$id, Swift_Mailer $mailer,UserRepository $UserRepository)
     {
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -155,7 +155,7 @@ class CourSalleController extends AbstractController
 
         $cour_salles=$courSalleRepository->findSalleTrie((int)$id,$trie,$by);
         // Retrieve the HTML generated in our twig file
-        $salle=$utilisateurRepository->find($id);
+        $salle=$UserRepository->find($id);
         $html = $this->renderView('cour_salle/ListePDF.html.twig', [
             'cour_salles' =>$cour_salles ,'salle'=>$salle
         ]);
@@ -170,9 +170,9 @@ class CourSalleController extends AbstractController
         $dompdf->render();
         $message=(new \Swift_Message('Liste Cours'));
         $message->setFrom("ibrahim.reguigui@esprit.tn");
-        $message->setTo($utilisateurRepository->find($id)->getAdresseMail());
+        $message->setTo($UserRepository->find($id)->getAdresseMail());
         $img=$message->embed(\Swift_Image::fromPath('logo.png'));
-        $message->setBody($this->renderView('Mail/listeCoursSalle.html.twig',['salle'=>$utilisateurRepository->find($id),'img'=>$img]),'text/html');
+        $message->setBody($this->renderView('Mail/listeCoursSalle.html.twig',['salle'=>$UserRepository->find($id),'img'=>$img]),'text/html');
 
         $output = $dompdf->output();
 
@@ -225,9 +225,9 @@ class CourSalleController extends AbstractController
     public function new(Request $request, CourSalleRepository $courSalleRepository): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(Utilisateur::class)->find(3);
+        $user = $em->getRepository(User::class)->find(3);
         $courSalle = new CourSalle();
-        $courSalle->setUtilisateur($user);
+        $courSalle->setUser($user);
         $courSalle->setNbrActuel(0);
         $form = $this->createForm(CourSalleType::class, $courSalle);
         $form->handleRequest($request);

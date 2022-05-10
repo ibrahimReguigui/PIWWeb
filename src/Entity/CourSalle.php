@@ -64,10 +64,10 @@ class CourSalle
     private $tCour;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="courSalles")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="courSalles")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $Utilisateur;
+    private $User;
 
     /**
      * @ORM\OneToMany(targetEntity=ReservationCourSalle::class, mappedBy="idCour", orphanRemoval=true)
@@ -158,14 +158,14 @@ class CourSalle
         return $this;
     }
 
-    public function getUtilisateur(): ?Utilisateur
+    public function getUser(): ?User
     {
-        return $this->Utilisateur;
+        return $this->User;
     }
 
-    public function setUtilisateur(?Utilisateur $Utilisateur): self
+    public function setUser(?User $User): self
     {
-        $this->Utilisateur = $Utilisateur;
+        $this->User = $User;
 
         return $this;
     }

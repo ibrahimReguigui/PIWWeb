@@ -4,11 +4,11 @@ namespace App\Controller;
 
 use App\Entity\DisponibiliteCoach;
 use App\Entity\ReservationCoach;
-use App\Entity\Utilisateur;
+use App\Entity\User;
 use App\Form\ReservationCoachType;
 use App\Repository\DisponibiliteCoachRepository;
 use App\Repository\ReservationCoachRepository;
-use App\Repository\UtilisateurRepository;
+use App\Repository\UserRepository;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Swift_Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,11 +36,11 @@ class ReservationCoachController extends AbstractController
     /**
      * @Route("/reserver/{idCoach}/{idDisponibilite}", name="app_reservation_coach_reserver", methods={"GET"})
      */
-    public function reserver(FlashyNotifier $flashy,$idDisponibilite,$idCoach,ReservationCoachRepository $reservationCoachRepository,UtilisateurRepository $utilisateurRepository,
+    public function reserver(FlashyNotifier $flashy,$idDisponibilite,$idCoach,ReservationCoachRepository $reservationCoachRepository,UserRepository $UserRepository,
                              DisponibiliteCoachRepository $disponibiliteCoachRepository): Response
     {   $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(Utilisateur::class)->find(6);
-        $coach=$utilisateurRepository->find($idCoach);
+        $user = $em->getRepository(User::class)->find(6);
+        $coach=$UserRepository->find($idCoach);
         $disponibilite=$disponibiliteCoachRepository->find($idDisponibilite);
 
 //$reservationCoachRepository->findOneBy(['idCoach'=>$idCoach,'idParticipant'=>$user->getId(),'date'=>$disponibilite->getDate(),'time'=>$disponibilite->getTime()]);
@@ -71,7 +71,7 @@ class ReservationCoachController extends AbstractController
      */
     public function reservation(ReservationCoachRepository $reservationCoachRepository): Response
     {   $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(Utilisateur::class)->find(6);
+        $user = $em->getRepository(User::class)->find(6);
 
         return $this->render('reservation_coach/reservation.html.twig', [
             'reservations' => $reservationCoachRepository->findBy(['idParticipant'=>($user->getId())]),

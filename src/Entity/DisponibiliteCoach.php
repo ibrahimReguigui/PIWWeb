@@ -18,7 +18,7 @@ class DisponibiliteCoach
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="disponibiliteCoaches")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="disponibiliteCoaches")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idCoach;
@@ -40,12 +40,12 @@ class DisponibiliteCoach
         return $this->id;
     }
 
-    public function getIdCoach(): ?Utilisateur
+    public function getIdCoach(): User
     {
         return $this->idCoach;
     }
 
-    public function setIdCoach(?Utilisateur $idCoach): self
+    public function setIdCoach(?User $idCoach): self
     {
         $this->idCoach = $idCoach;
 

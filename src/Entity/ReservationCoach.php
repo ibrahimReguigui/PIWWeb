@@ -27,7 +27,7 @@ class ReservationCoach
     private $reservationCoaches;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="reservationCoaches")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reservationCoaches")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idParticipant;
@@ -38,7 +38,7 @@ class ReservationCoach
     private $etat;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="reservationCoachCoach")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reservationCoachCoach")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idCoach;
@@ -100,12 +100,12 @@ class ReservationCoach
         return $this;
     }
 
-    public function getIdParticipant(): ?Utilisateur
+    public function getIdParticipant(): ?User
     {
         return $this->idParticipant;
     }
 
-    public function setIdParticipant(?Utilisateur $idParticipant): self
+    public function setIdParticipant(?User $idParticipant): self
     {
         $this->idParticipant = $idParticipant;
 
@@ -124,12 +124,12 @@ class ReservationCoach
         return $this;
     }
 
-    public function getIdCoach(): ?Utilisateur
+    public function getIdCoach(): ?User
     {
         return $this->idCoach;
     }
 
-    public function setIdCoach(?Utilisateur $idCoach): self
+    public function setIdCoach(?User $idCoach): self
     {
         $this->idCoach = $idCoach;
 

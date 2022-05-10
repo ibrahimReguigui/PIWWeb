@@ -1,0 +1,5 @@
+{{ form_start(form,{attr: {novalidate:'novalidate'}})  }}
+{{ form_errors(form) }}
+    {{ form_widget(form,{attr: {novalidate:'novalidate'}}) }}
+    <button  class="btn btn-outline-success pull-right" >{{ button_label|default('Ajouter') }}</button>
+{{ form_end(form) }}

@@ -3,11 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\ReservationCourSalle;
-use App\Entity\Utilisateur;
+use App\Entity\User;
 use App\Form\ReservationCourSalleType;
 use App\Repository\CourSalleRepository;
 use App\Repository\ReservationCourSalleRepository;
-use App\Repository\UtilisateurRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Knp\Component\Pager\PaginatorInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
@@ -37,7 +37,7 @@ class ReservationCourSalleController extends AbstractController
     public function reserver(FlashyNotifier $flashy,$idCour,$idSalle,CourSalleRepository $courSalleRepository,ReservationCourSalleRepository $reservationCourSalleRepository): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(Utilisateur::class)->find(6);
+        $user = $em->getRepository(User::class)->find(6);
 
         $reservation = new ReservationCourSalle();
         $cour=$courSalleRepository->find($idCour);
@@ -53,7 +53,7 @@ class ReservationCourSalleController extends AbstractController
             $cour->setNbrActuel(($cour->getNbrActuel())+1);
             $em->persist($cour);
             $em->flush();
-            $salle=  $em->getRepository(Utilisateur::class)->find($idSalle);
+            $salle=  $em->getRepository(User::class)->find($idSalle);
             $reservation->setIdSportif($user);
             $reservation->setIdCour($cour);
             $reservation->setIdSalle($salle);
@@ -71,7 +71,7 @@ class ReservationCourSalleController extends AbstractController
     public function listeCour( CourSalleRepository $courSalleRepository,PaginatorInterface $paginator,Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(Utilisateur::class)->find(6);
+        $user = $em->getRepository(User::class)->find(6);
         $cour_salles=$courSalleRepository->findAll();
 
         return $this->render('reservation_cour_salle/liste_cour.html.twig', [
@@ -100,7 +100,7 @@ class ReservationCourSalleController extends AbstractController
     /**
      * @Route("/recherche",name="recherche")
      */
-    public function Recherche(CourSalleRepository $courSalleRepository,Request $request,UtilisateurRepository $utilisateurRepository,PaginatorInterface $paginator){
+    public function Recherche(CourSalleRepository $courSalleRepository,Request $request,UserRepository $UserRepository,PaginatorInterface $paginator){
         $data=$request->get('search');
         $bycour=$request->get('Nom_Cour');
         $bysalle=$request->get('Nom_Salle');

@@ -18,13 +18,13 @@ class ReservationCourSalle
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="reservationCourSalle_Salle")
+     * @ORM\ManyToOne(targetEntity=USER::class, inversedBy="reservationCourSalle_Salle")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idSalle;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="reservationCourSalleSportif")
+     * @ORM\ManyToOne(targetEntity=uSER::class, inversedBy="reservationCourSalleSportif")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idSportif;
@@ -42,24 +42,24 @@ class ReservationCourSalle
         return $this->id;
     }
 
-    public function getIdSalle(): ?Utilisateur
+    public function getIdSalle(): ?User
     {
         return $this->idSalle;
     }
 
-    public function setIdSalle(?Utilisateur $idSalle): self
+    public function setIdSalle(?User $idSalle): self
     {
         $this->idSalle = $idSalle;
 
         return $this;
     }
 
-    public function getIdSportif(): ?Utilisateur
+    public function getIdSportif(): ?User
     {
         return $this->idSportif;
     }
 
-    public function setIdSportif(?Utilisateur $idSportif): self
+    public function setIdSportif(?User $idSportif): self
     {
         $this->idSportif = $idSportif;
 
