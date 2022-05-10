@@ -587,7 +587,7 @@ ol {
 -----------------------*/
 
 .choseus-section {
-	background: #0a0a0a;
+	background: #ecf0f1;
 	padding-bottom: 70px;
 }
 
@@ -2769,6 +2769,7 @@ ol {
 @media only screen and (min-width: 1200px) {
 	.container {
 		max-width: 1170px;
+		color: #d39e00;
 	}
 }
 

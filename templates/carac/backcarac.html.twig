@@ -1,0 +1,57 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Hello CaracController!{% endblock %}
+
+{% block body %}
+
+    <h1>Tous les Besoins</h1>
+
+
+    <table class="table">
+        <thead>
+
+
+        <tr>
+            <th>Votre Taille</th>
+            <th>Votre Poid</th>
+            <th>Votre Age</th>
+            <th>Votre Objectif</th>
+            <th>Votre Bmi</th>
+            <th>Besoin protein</th>
+            <th>Besoin carb</th>
+            <th>Besoin calories</th>
+            <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for c in caracs %}
+            <tr>
+                <td>{{ c.tailleSportif }}</td>
+                <td>{{ c.poidSportif }}</td>
+                <td>{{ c.ageSportif }}</td>
+                <td>{{ c.objectifNutrition }}</td>
+                <td>{{ c.bmiSportif }}</td>
+                <td>{{ c.besoinProteine }}</td>
+                <td>{{ c.besoinCarb }}</td>
+                <td>{{ c.besoinCalories }}</td>
+
+                <td>
+
+
+                    <!--<a href="{{ path('modifCa', {'id': c.id}) }}">Edit</a> -->
+                    <a  href="{{ path('removeCa', {'id': c.id}) }}">Delete</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('addCarac') }}">Create new</a><br>
+    <a href="{{ path('app_plat_index') }}">Plats</a>
+{% endblock %}

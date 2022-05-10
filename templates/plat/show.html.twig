@@ -1,0 +1,46 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Plat{% endblock %}
+
+{% block body %}
+    <h1>Plat</h1>
+    <div class="">
+        <aside class="profile-nav alt">
+            <section class="card">
+                <div class="card-header user-header alt bg-dark">
+                    <div class="media">
+                        <a href="#">
+                            <img class="align-self-center rounded-circle mr-3" style="width:85px; height:85px;" alt="" src="images/admin.jpg">
+                        </a>
+                        <div class="media-body">
+                            <h2 class="text-light display-6">{{ plat.nom }}</h2>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="float-right">
+
+
+                        <button class="btn btn-outline-info"><a href="{{ path('app_plat_edit', {'id': plat.id}) }}">edit</a></button>
+                        {{ include('plat/_delete_form.html.twig') }}
+
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a href="#">  Calories <span class="badge badge-primary pull-right">{{ plat.calories }}</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">  Poids <span class="badge badge-danger pull-right">{{ plat.poids }}</span></a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#">  Proteins <span class="badge badge-success pull-right">{{ plat.protein }}</span></a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+    </div>
+
+    <a class="btn btn-primary btn-sm" href="{{ path('app_plat_index') }}"><i class="fa fa-arrow-circle-o-left"></i></a>
+
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'front/fresh-base.html.twig' %}
+
+{% block title %}Hello CaracController!{% endblock %}
+
+{% block body %}
+
+    <h1>vos Besoins</h1>
+    <table class="table">
+        <thead>
+
+
+        <tr>
+            <th>Votre Taille</th>
+            <th>Votre Poid</th>
+            <th>Votre Age</th>
+            <th>Votre Objectif</th>
+            <th>Votre Bmi</th>
+            <th>Besoin protein</th>
+            <th>Besoin carb</th>
+            <th>Besoin calories</th>
+            <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>{{ carac.tailleSportif }}</td>
+                <td>{{ carac.poidSportif }}</td>
+                <td>{{ carac.ageSportif }}</td>
+                <td>{{ carac.objectifNutrition }}</td>
+                <td>{{ carac.bmiSportif }}</td>
+                <td>{{ carac.besoinProteine }}</td>
+                <td>{{ carac.besoinCarb }}</td>
+                <td>{{ carac.besoinCalories }}</td>
+
+
+                <td>
+
+
+                    <a href="{{ path('modifCa', {'id': carac.id}) }}">Edit</a>
+                    <a  href="{{ path('removeCa', {'id': carac.id}) }}">Delete</a>
+
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('addCarac') }}">Create new</a><br>
+
+    <a {% if carac.objectifNutrition == "Gain de poid" %}
+            href="{{ path('app_platfgain_index') }}
+            {% else %}
+            href="{{ path('app_platfperte_index') }}
+{% endif %}
+
+">Mes Plats</a>
+{% endblock %}
