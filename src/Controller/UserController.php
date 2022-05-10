@@ -123,9 +123,10 @@ class UserController extends AbstractController
     /**
      * @Route("/allsportifs", name="app_sportifs", methods={"GET"})
      */
-    public function allsportifs(Request $request,UserRepository $userRepository, PaginatorInterface $paginator): Response
+    public function allsportifs(Request $request,UserRepository $userRepository, PaginatorInterface $paginator,SessionInterface $session): Response
     {
 
+        $connectedd=$session->get('user');
 
         $nom="";
         $nom=$request->query->get('nomuser');
@@ -136,7 +137,8 @@ class UserController extends AbstractController
                 5);
 
             return $this->render('user/index.html.twig', [
-                'users' => $users,
+                'users' => $users,            'connected'=>$connectedd
+
             ]);
         }else{
             $users = $userRepository->findByNameUser($nom,"");
@@ -144,7 +146,8 @@ class UserController extends AbstractController
                 $request->query->getInt('page', 1),
                 5);
             return $this->render('user/index.html.twig', [
-                'users' => $users,
+                'users' => $users,   'connected'=>$connectedd
+
 
             ]);
         }
@@ -154,9 +157,10 @@ class UserController extends AbstractController
     /**
      * @Route("/alladmins", name="app_admins", methods={"GET"})
      */
-    public function alladmins(Request $request,UserRepository $userRepository, PaginatorInterface $paginator): Response
+    public function alladmins(Request $request,UserRepository $userRepository, PaginatorInterface $paginator,SessionInterface $session): Response
     {
 
+        $connectedd=$session->get('user');
 
         $nom="";
         $nom=$request->query->get('nomuser');
@@ -167,7 +171,8 @@ class UserController extends AbstractController
                 5);
 
             return $this->render('user/index.html.twig', [
-                'users' => $users,
+                'users' => $users,            'connected'=>$connectedd
+
             ]);
         }else{
             $users = $userRepository->findByNameUser($nom,"");
@@ -175,7 +180,8 @@ class UserController extends AbstractController
                 $request->query->getInt('page', 1),
                 5);
             return $this->render('user/index.html.twig', [
-                'users' => $users,
+                'users' => $users,            'connected'=>$connectedd
+
 
             ]);
         }
@@ -185,8 +191,9 @@ class UserController extends AbstractController
     /**
      * @Route("/allgerants", name="app_gérants", methods={"GET"})
      */
-    public function allgerants(Request $request,UserRepository $userRepository, PaginatorInterface $paginator): Response
+    public function allgerants(Request $request,UserRepository $userRepository, PaginatorInterface $paginator,SessionInterface  $session): Response
     {
+        $connectedd=$session->get('user');
 
 
         $nom="";
@@ -198,7 +205,8 @@ class UserController extends AbstractController
                 5);
 
             return $this->render('user/index.html.twig', [
-                'users' => $users,
+                'users' => $users,            'connected'=>$connectedd
+
             ]);
         }else{
             $users = $userRepository->findByNameUser($nom,"");
@@ -206,7 +214,8 @@ class UserController extends AbstractController
                 $request->query->getInt('page', 1),
                 5);
             return $this->render('user/index.html.twig', [
-                'users' => $users,
+                'users' => $users,            'connected'=>$connectedd
+
 
             ]);
         }

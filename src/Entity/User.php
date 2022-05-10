@@ -298,13 +298,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 
-
-     public function getIsconnected(): ?Boolean
+     public function getIsconnected(): ?bool
      {
          return $this->isconnected;
      }
 
-     public function setIsconnected(?Boolean $isconnected): self
+     public function setIsconnected(?bool $isconnected): self
      {
          $this->isconnected = $isconnected;
 
