@@ -1,0 +1,57 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}New Commentaire{% endblock %}
+{% block body %}
+         
+                <div class="table-responsive">
+                    <div class="container">
+                        <h1>Add new Event</h1>
+                        {{ form_start(e) }}
+
+                        <div class="form-group">
+                            <label>
+                                Name of the Event
+                            </label>
+                            {{ form_widget(e.nomevent,{'attr':{'class':'form-control'}}) }}
+                            {{ form_errors(e.nomevent) }}
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Date debut Evenement
+                            </label>
+                            {{ form_widget(e.datedebut,{'attr':{'class':'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Date fin Evenement
+                            </label>
+
+                            {{ form_widget(e.datefin,{'attr':{'class':'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Nombre de Places
+                            </label>
+                            {{ form_widget(e.nbrplaces,{'attr':{'class':'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                location
+                            </label>
+                            {{ form_widget(e.location,{'attr':{'class':'form-control'}}) }}
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                Event Image
+                            </label>
+                            {{ form_widget(e.img,{'attr':{'class':'form-control'}}) }}
+                            {{ form_errors(e.img) }}
+                        </div>
+                        {{ form_widget(e.save,{'attr':{'class':'btn btn-sm btn-success'}}) }}
+                        {{ form_end(e) }}
+                    </div>
+                </div>
+          
+{% endblock %}  
+
+
