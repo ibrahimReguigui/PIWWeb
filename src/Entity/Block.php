@@ -12,6 +12,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Block
 {
+    /**
+    * @ORM\Id
+    * @ORM\GeneratedValue
+    * @ORM\Column(type="integer")
+
+    */
+    private $id;
+
+
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -19,6 +28,22 @@ class Block
 
      */
     private $blocRaison;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
 
     /**
      * @ORM\Column(type="date", nullable=true)
