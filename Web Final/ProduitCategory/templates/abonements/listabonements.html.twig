@@ -1,0 +1,35 @@
+
+{% block body %}
+    <h1>Liste des Abonnements</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>NomSportif</th>
+            <th>PrenomSportif</th>
+            <th>Dated</th>
+            <th>Datef</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for abonement in abonements %}
+            <tr>
+
+                <td>{{ abonement.NomSportif }}</td>
+                <td>{{ abonement.PrenomSportif }}</td>
+                <td>{{ abonement.dated ? abonement.dated|date('Y-m-d') : '' }}</td>
+                <td>{{ abonement.datef ? abonement.datef|date('Y-m-d') : '' }}</td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

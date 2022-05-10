@@ -1,0 +1,13 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Edit Abonements{% endblock %}
+
+{% block body %}
+    <h1>Edit Abonements</h1>
+
+    {{ include('abonements/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_abonements_index') }}">back to list</a>
+
+    {{ include('abonements/_delete_form.html.twig') }}
+{% endblock %}

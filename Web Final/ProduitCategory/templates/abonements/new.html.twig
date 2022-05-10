@@ -1,0 +1,11 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}New Abonements{% endblock %}
+
+{% block body %}
+    <h1>Create new Abonements</h1>
+
+    {{ include('abonements/_form.html.twig') }}
+
+    <a href="{{ path('app_abonements_index') }}">back to list</a>
+{% endblock %}

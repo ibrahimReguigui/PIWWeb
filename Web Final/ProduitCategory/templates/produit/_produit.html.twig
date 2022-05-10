@@ -1,0 +1,14 @@
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">
+            <a href="{{ path('produit.show',{slug:produit.slug, id:produit.id}) }}">
+                {{ produit.titre }}
+            </a>
+            <p class="card-text">{{ produit.discription | nl2br }}</p>
+            <div class="text-primary" style="font-size: 2rem; font-weight: bold;">
+                {{ produit.formattedPrix }} $
+            </div>
+
+        </h5>
+    </div>
+</div>

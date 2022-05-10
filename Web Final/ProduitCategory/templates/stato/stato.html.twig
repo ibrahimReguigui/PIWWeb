@@ -1,0 +1,37 @@
+{% extends 'base-back.html.twig' %}
+{% block body %}
+
+
+
+    <canvas id="lineChart" style="max-height: 400px; display: block; box-sizing: border-box; height: 289.6px; width: 580px;" width="725" height="362"></canvas>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            new Chart(document.querySelector('#lineChart'), {
+                type: 'pie',
+                data: {
+                    labels: {{ cat|raw }},
+                    datasets: [{
+                        label: 'Revenus par an',
+                        data: ["1","2","3","4","5"],
+                    }],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(255, 205, 86)',
+                        'rgb(255, 205, 86)',
+                    ],
+                    borderWidth: 1
+                }
+            });
+        });
+    </script>
+{% endblock %}
+

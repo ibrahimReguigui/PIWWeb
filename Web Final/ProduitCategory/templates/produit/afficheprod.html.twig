@@ -1,0 +1,48 @@
+{% extends 'front/fresh-base.html.twig' %}
+{% block title %}
+    add prod
+{% endblock %}
+{%block css  %}{% endblock %}
+{%block home%} {% endblock%}
+{% block landing %} {% endblock %}
+{% block tournament%}{% endblock%}
+{% block pro%}{% endblock%}
+{% block blog%}active{% endblock %}
+{% block store%}{% endblock %}
+{% block script %}{% endblock %}
+{% block  body%}
+    <div class="container">
+<h1>liste des produit</h1>
+<table border="1">
+    <tr>
+        <th>Id:</th>
+        <th>Name:</th>
+        <th> Description</th>
+        <th> Image </th>
+        <th> Price  </th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+    {% for c in tab %}
+        <tr>
+
+            <td>{{c.id}}</td>
+            <td>{{c.libelle}}</td>
+            <td>{{c.Discription}}</td>
+            <td><img src="uploads/images/products/{{c.image}}" width="50px" height="50px"></td>
+            <td>{{c.prix}}</td>
+            <td><a href="{{path('d',{'id':c.id})}}">Delete</a></td>
+            <td><a href="{{ path('update',{'id':c.id}) }}">Update</a></td>
+
+        </tr>
+    {% endfor %}
+</table>
+        <div> <a href="{{path('addproduct')}}">ajouter un produit</a> </div>
+        <div class="nk-gap-2 d-none d-lg-block"></div>
+    <div class="nk-gap-2 d-none d-lg-block"></div>
+    <div class="nk-gap-2 d-none d-lg-block"></div>
+    <div class="nk-gap-2 d-none d-lg-block"></div>
+    <div class="nk-gap-2 d-none d-lg-block"></div>
+    </div>
+
+{% endblock %}

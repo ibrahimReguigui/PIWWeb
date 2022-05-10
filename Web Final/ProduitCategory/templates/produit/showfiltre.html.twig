@@ -1,0 +1,156 @@
+{% extends 'front/fresh-base.html.twig' %}
+
+{% block title %}prdts{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+{% endblock %}
+{% block body %}
+    <div class="jumbotron">
+        <div class="container mt-4">
+            <h4>Adapter votre recherche </h4>
+            <br>
+            <br>
+
+
+            {{ form_start(form) }}
+            <div class = "form - row align - items - end" >
+                <div class = "col" >
+
+                </div >
+                <div class = "col" >
+                    <div class = "form - group" >
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+
+                </div>
+                <div class="col">
+
+                </div>
+                <div class="form-row align-items-end" >
+                    <div class="col">
+                        {{ form_row(form.minPrice) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(form.maxPrice) }}
+                    </div>
+
+                    <div class="col">
+
+                        <button type = "submit" class = "btn btn - success" > Filtrer </button>
+                    </div>
+
+                </div>
+
+                {{ form_end(form) }}
+
+
+
+
+            </div>
+        </div>
+
+        <h1 style="color: #ad6704">Consulter la liste des Produits</h1>
+
+        <div class="container mt-4">
+
+            <div class="row">
+                {% for produit in produits %}
+                    <div class="col-md-4">
+                        <div style="background-color: white" >
+                            <div class="alert alert-success" id="success-alert">
+
+                                <img src="{{ asset('uploads/images/' ~ produit.image) }}"
+                                     alt="" style="width: 150px; height: 150px;">
+
+                                <br>
+                                <br>
+                                <br>
+                                <h5 style="color: #0a0a0a">{{ "description : " ~ produit.description }}</h5>
+                                <h3 style="color: #950B02">{{ "Prix : " ~ produit.prix ~ "€" }}</h3>
+                                <br>
+                                <h3>Evaluer le Produit</h3>
+
+                                <link rel="stylesheet" href="https://fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60MIM7uH2+nqUivzIebhndOJK28anyf",crossorigin="anonymous">
+                                <div align="center" style="background:#0a0a0a ;padding: 15px">
+
+                                    <i class="fa fa-star fa-2x" data-index="0"></i>
+                                    <i class="fa fa-star fa-2x" data-index="1"></i>
+                                    <i class="fa fa-star fa-2x" data-index="2"></i>
+                                    <i class="fa fa-star fa-2x" data-index="3"></i>
+                                    <i class="fa fa-star fa-2x" data-index="4"></i>
+
+                                </div>
+                                <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+                                <script>
+                                    var ratedIndex = -1, uID = 0;
+                                    $(document).ready(function (){
+                                        ressetStarColors();
+
+                                        $('.fa-star').on('click', function () {
+                                            ratedIndex = parseInt($(this).data('index'));
+                                            localStorage.setItem('ratedIndex', ratedIndex);
+                                            saveToTheDB();
+                                        });
+
+                                        $('.fa-star').mouseover(function (){
+                                            ressetStarColors()
+
+                                            var currentIndex = parseInt($(this).data('index'));
+
+                                            for (var i=0;i<=currentIndex;i++)
+                                                $('.fa-star:eq('+i+')').css('color','orange');
+                                        });
+                                        $('.fa-star').mouseleave(function (){
+                                            ressetStarColors()
+                                            if(ratedIndex != -1)
+                                                for (var i=0;i<=ratedIndex;i++)
+                                                    $('.fa-star:eq('+i+')').css('color','orange');
+
+                                        });
+                                    });
+
+                                    function saveToTheDB() {
+                                        $.ajax({
+                                            url: "show.html.php",
+                                            method: "POST",
+                                            dataType: 'json',
+                                            data: {
+                                                save: 1,
+                                                uID: uID,
+                                                ratedIndex: ratedIndex
+                                            }, success: function (r) {
+                                                uID = r.id;
+                                                localStorage.setItem('uID', uID);
+                                            }
+                                        });
+                                    }
+
+                                    function ressetStarColors() {
+                                        $('.fa-star').css('color','white');
+
+                                    }
+
+                                </script>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {{ knp_pagination_render(produits) }}
+
+    <a style="color: #ad6704" href="{{ path('app_contact') }}">Contacter Nous</a>
+{% endblock %}
+

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Abonements{% endblock %}
+
+{% block body %}
+    <h1>Abonements</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ abonement.id }}</td>
+            </tr>
+            <tr>
+                <th>NomSportif</th>
+                <td>{{ abonement.NomSportif }}</td>
+            </tr>
+            <tr>
+                <th>PrenomSportif</th>
+                <td>{{ abonement.PrenomSportif }}</td>
+            </tr>
+            <tr>
+                <th>Dated</th>
+                <td>{{ abonement.dated ? abonement.dated|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Datef</th>
+                <td>{{ abonement.datef ? abonement.datef|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_abonements_index') }}">back to list</a>
+
+    <a href="{{ path('app_abonements_edit', {'id': abonement.id}) }}">edit</a>
+
+    {{ include('abonements/_delete_form.html.twig') }}
+{% endblock %}
