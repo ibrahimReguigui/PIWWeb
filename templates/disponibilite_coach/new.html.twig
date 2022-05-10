@@ -1,0 +1,10 @@
+{% extends 'base-back.html.twig' %}
+
+{% block titreGauche %}Disponibilitées > Ajouter{% endblock %}
+{% block titreDroite %}Coach2 {% endblock %}
+{% block body %}
+
+    {{ include('disponibilite_coach/_form.html.twig') }}
+
+    <a href="{{ path('app_disponibilite_coach_index') }}"class="btn btn-outline-danger">Retour</a>
+{% endblock %}

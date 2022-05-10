@@ -1,0 +1,26 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}ReservationCoach{% endblock %}
+
+{% block body %}
+    <h1>ReservationCoach</h1>
+
+    <table class="table table-bordered bg-white mt-5 mb-5">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reservation_coach.id }}</td>
+            </tr>
+            <tr>
+                <th>Etat</th>
+                <td>{{ reservation_coach.etat }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_coach_index') }}">back to list</a>
+
+    <a href="{{ path('app_reservation_coach_edit', {'id': reservation_coach.id}) }}">edit</a>
+
+    {{ include('reservation_coach/_delete_form.html.twig') }}
+{% endblock %}

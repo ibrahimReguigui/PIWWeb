@@ -1,0 +1,10 @@
+{% extends 'base-back.html.twig' %}
+
+{% block titreGauche %}Salle > Nouveau Cour{% endblock %}
+{% block titreDroite %}Salle1{% endblock %}
+{% block body %}
+
+
+    {{ include('cour_salle/_form.html.twig') }}
+    <a href="{{ path('app_cour_salle_index') }}"type="button" class="btn btn-outline-danger">Retour</a>
+{% endblock %}

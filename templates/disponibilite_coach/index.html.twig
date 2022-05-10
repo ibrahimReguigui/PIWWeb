@@ -1,0 +1,42 @@
+{% extends 'base-back.html.twig' %}
+
+{% block titreGauche %}Disponibilitées > Consulter{% endblock %}
+{% block titreDroite %}Coach2 {% endblock %}
+
+{% block body %}
+
+
+    <table class="table table-bordered bg-white mt-5 mb-5">
+        <thead class="thead-dark">
+            <tr>
+                <th><a href="{{ path('app_disponibilite_coach_index_trie', {'Ttrie':'ASC','By':'d.date'}) }}">
+                        ↑ </a>   Date   <a href="{{ path('app_disponibilite_coach_index_trie', {'Ttrie':'DESC','By':'d.date'}) }}">
+                        ↓ </a> </th>
+                <th><a href="{{ path('app_disponibilite_coach_index_trie', {'Ttrie':'ASC','By':'d.time'}) }}">
+                        ↑ </a>   Time   <a href="{{ path('app_disponibilite_coach_index_trie', {'Ttrie':'DESC','By':'d.time'}) }}">
+                        ↓ </a> </th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for disponibilite_coach in disponibilite_coaches %}
+            <tr>
+
+                <td>{{ disponibilite_coach.date ? disponibilite_coach.date|date('Y-m-d') : '' }}</td>
+                <td>{{ disponibilite_coach.time ? disponibilite_coach.time|date('H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_disponibilite_coach_edit', {'id': disponibilite_coach.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center">
+        {{ knp_pagination_render(disponibilite_coaches,'Pagination/pagination.html.twig') }}
+    </div>
+{% endblock %}

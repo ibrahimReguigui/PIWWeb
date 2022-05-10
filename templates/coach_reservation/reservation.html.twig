@@ -1,0 +1,78 @@
+{% extends 'base-back.html.twig' %}
+
+{% block titreGauche %}Reservations > Traiter{% endblock %}
+{% block titreDroite %}Coach2 {% endblock %}
+{% block body %}
+
+    <div class="content mt-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="stat-widget-one"style="display:flex;justify-content: center;flex-wrap: wrap;
+                            align-content: space-around;flex-direction: row">
+                    <div class="stat-icon dib"><i class="ti-layout-grid2 text-warning border-warning"></i></div>
+                    <div class="stat-content dib">
+                        <form   method="post" action="{{ path('app_coach_reservation_traiter_filtrer') }}">
+
+                            <div style="display:flex;justify-content: center;flex-wrap: wrap;
+                            align-content: space-around;flex-direction: row">
+                                <div style="width:150px" >
+                                    <div> <input type="checkbox"  id="En_Attente" name="En_Attente">
+                                    <label class="stat-text">En Attente</label></div>
+                                    <div style="text-align: center;width:80px"><label>{{ countB }}</label></div>
+                                </div>
+                                <div style="width:150px">
+                                    <div><input type="checkbox" id="Acceptée" name="Acceptée">
+                                        <label class="stat-text">Acceptée</label></div>
+                                    <div style="text-align: center;width:80px"><label>{{ countA }}</label></div>
+
+
+                                </div >
+                                <input class="btn btn-primary mb-2"type="submit"  value="Consulter" >
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-bordered bg-white mt-5 mb-5">
+        <thead class="thead-dark">
+        <tr>
+
+            <th>Nom</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Etat</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+
+                <td>{{ reservation.idParticipant.nom }}</td>
+                <td>{{ reservation.date|date('Y-m-d') }}</td>
+                <td>{{ reservation.time|date('H:i:s') }}</td>
+                <td>{{ reservation.etat }}</td>
+                <td>
+                    {% if reservation.etat!='Acceptée' %}
+                    <a href="{{ path('app_coach_reservation_accepter',{'id':reservation.id}) }}" >Accepter</a>
+                    {% endif %}
+                    <a href="{{ path('app_coach_reservation_annuler',{'id':reservation.id}) }}" >Refuser</a>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Données Inexistantes</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+        {{ knp_pagination_render(reservations,'Pagination/pagination.html.twig') }}
+    </div>
+{% endblock %}

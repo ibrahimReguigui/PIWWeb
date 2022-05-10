@@ -761,7 +761,14 @@ ol {
 /*---------------------
   Pricing Section
 -----------------------*/
+.searchP{
+	background: #151515;margin-bottom: 56px;text-align: center;
+	padding: 40px 30px 52px;
+	border: 1px solid #464646;
+	margin-left: 400px;margin-right: 400px;
 
+
+}
 .pricing-section {
 	background: #151515;
 }
