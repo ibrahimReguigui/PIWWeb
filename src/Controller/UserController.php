@@ -8,21 +8,51 @@ use App\Form\BlockType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use phpDocumentor\Reflection\DocBlock\Serializer;
 use phpDocumentor\Reflection\Types\Boolean;
 use phpDocumentor\Reflection\Types\False_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 /**
  * @Route("/user")
  */
 class UserController extends AbstractController
 {
+
+    /**
+     * @Route ("/signin", name="app_login_signin")
+     */
+    public function signinAction(Request $request,NormalizerInterface $normalizer){
+
+        $email = $request->query->get("mailAdress");
+        $password=$request->query->get("password");
+
+        $em=$this->getDoctrine()->getManager();
+        $user=$em->getRepository(User::class)->findOneBy(['mailAdress'=>$email]);
+
+        if($user){
+            if(password_verify($password, $user->getPassword())){
+                $jsonContent =$normalizer->normalize($user,'json',['groups'=>'post:read']);
+            }else{
+                return new Response("password not found");
+            }
+        }
+        return new Response("failed");
+
+    }
+
+
+
+
+
 
     public static $logged=false;
 
@@ -393,7 +423,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/{id}", name="app_user_delete", methods={"POST"})
+     * @Route("/{id}/delete", name="app_user_delete", methods={"POST"})
      */
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
@@ -403,6 +433,58 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+
+
+    /**
+     * @Route("/deletejson/{id}", name="app_user_delete_json")
+     */
+    public function deletefrommobile(Request $request,NormalizerInterface $normalizer, $id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+        $em->remove($user);
+        $em->flush();
+        $jsonContent =$normalizer->normalize($user, 'json',['groups'=>'post:read']);
+        return new Response("Student deeted successfully !!!!!".json_encode($jsonContent));
+
+
+    }
+
+    /**
+     * @Route("/signup" , name="signup_mobile" )
+     */
+    public function signup(Request $request, NormalizerInterface $normalizer, UserRepository $usersRepository )
+    {
+        $nom = $request->query->get("nom");
+        $prenom = $request->query->get("prenom");
+        $adresse = $request->query->get("password");
+        $numTel = $request->query->get("password");
+        $whoami = $request->query->get("whoami");
+        $password = $request->query->get("password");
+        $mail = $request->query->get("mailAdress");
+
+
+
+        $user = new User();
+        $user ->setMailAdress($mail);
+        $user->setPassword(openssl_encrypt($password, "AES-128-ECB", null)) ;
+        $user ->setNom($nom);
+        $user ->setPrenom($prenom);
+        $user ->setAdresse($adresse);
+        $user ->setNumTel($numTel);
+        $user ->setWhoami($whoami);
+
+
+        $usersRepository->add($user);
+
+
+    }
+
+
+
+
 
 
 public static function loggingchange(){
