@@ -1,0 +1,54 @@
+{% extends 'front/fresh-base.html.twig' %}
+
+{% block title %}Hello Event Controller{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Event List</h1>
+
+        <a href="{{ path("newEventPage") }}" class="btn btn-sm btn-warning">
+            add a new Event
+        </a>
+        <br> <br>
+        <table class="table table-info">
+
+            <tr>
+                <th>Identifiant Commentaire</th>
+                <th>
+                   categorie
+                </th>
+                <th>
+                   message
+
+                </th>
+                <th>Date fin Evenement</th>
+                <th>Nombre de Places</th>
+                <th>Location</th>
+                <th>Image</th>
+            </tr>
+            {% for cmd in list %}
+            <tbody id="all">
+            <tr>
+                <td>{{ cmd.idCommentaire }}</td>
+                <td>{{ cmd.categorie }}</td>
+                <td>{{ cmd.message }}</td>
+
+                <td>
+                    <a href="{{ path("deleteCommentairePage",{'idCommentaire':cmd.idCommentaire }) }}">
+                        <button class="btn btn-sm btn-outline-danger">delete</button>
+                    </a>
+
+                    <a href="{{ path("UpdateCommentairePage",{'idCommentaire':cmd.idCommentaire}) }}">
+                        <button class="btn btn-sm btn-outline-primary">Update</button>
+                    </a>
+                </td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+    
+
+{% endblock %}
+

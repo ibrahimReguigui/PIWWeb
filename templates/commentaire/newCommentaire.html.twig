@@ -1,0 +1,26 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}New Commentaire{% endblock %}
+{% block body %}
+                <div class="table-responsive">
+                    <div class="container">
+                        <h1>Add new Comment</h1>
+                        {{ form_start(e) }}
+
+                        <div class="form-group">
+                            <label>
+                                categorie
+                            </label>
+                            {{ form_widget(e.categorie,{'attr':{'class':'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                message
+                            </label>
+                            {{ form_widget(e.message,{'attr':{'class':'form-control'}}) }}
+                        </div>
+                        {{ form_widget(e.save,{'attr':{'class':'btn btn-sm btn-success'}}) }}
+                        {{ form_end(e) }}
+                    </div>
+                </div>
+{% endblock %}          
+

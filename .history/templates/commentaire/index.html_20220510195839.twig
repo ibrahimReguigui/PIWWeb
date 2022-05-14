@@ -1,0 +1,55 @@
+{% extends 'front/fresh-base.html.twig' %}
+
+{% block title %}Hello Commentaire Controller{% endblock %}
+
+{% block body %}
+    
+        <div class="container">
+       
+
+            <h1>Commentaire List</h1>
+
+            {#<a href="{{ path("newCommentairePage") }}" class="btn btn-sm btn-warning">
+                add a new Comment
+            </a>#}
+            <br> <br>
+            <table id="t" class="table table-info">
+
+                <tr>
+                    <th>Identifiant Commentaire</th>
+                    <th>Categorie</th>
+                    <th>Message</th>
+                </tr>
+
+                {% for cmd in list %}
+                <tbody id="all">
+                    <tr>
+                        <td>{{ cmd.idCommentaire }}</td>
+                        <td>{{ cmd.categorie }}</td>
+                        <td>{{ cmd.message }}</td>
+
+                        <td>
+                            <a href="{{ path("deleteCommentairePage",{'idCommentaire':cmd.idCommentaire }) }}">
+                                <button class="btn btn-sm btn-outline-danger">delete</button>
+                            </a>
+
+                            <a href="{{ path("UpdateCommentairePage",{'idCommentaire':cmd.idCommentaire}) }}">
+                                <button class="btn btn-sm btn-outline-primary">Update</button>
+                            </a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+                    <tbody id="search"></tbody>
+                </table>
+          {{ knp_pagination_render(list) }}
+
+           
+           
+        
+        </div>
+     </div>   
+{% endblock %}
+

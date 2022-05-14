@@ -1,0 +1,27 @@
+{% extends 'base-back.html.twig' %}
+{% block title %}New Ticket{% endblock %}
+{% block body %}
+                <div class="table-responsive">
+                    <div class="container">
+                        <h1>Add new Ticket</h1>
+                        {{ form_start(e) }}
+                        <div class="form-group">
+                            <label>
+                                prix du Ticket
+                            </label>
+                            {{ form_widget(e.prix,{'attr':{'class':'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                idEvent
+                            </label>
+                            {{ form_widget(e.Event,{'attr':{'class':'form-control'}}) }}
+                        </div>
+
+                        {{ form_widget(e.save,{'attr':{'class':'btn btn-sm btn-success'}}) }}
+                        {{ form_end(e) }}
+                    </div>
+                </div>
+{% endblock %}          
+
+

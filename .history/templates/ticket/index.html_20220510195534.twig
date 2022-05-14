@@ -1,0 +1,61 @@
+{% extends 'front/fresh-base.html.twig' %}
+{% block title %}Hello Ticket Controller{% endblock %}
+{% block body %}
+
+    <div class="container">
+        {% block search %}
+                <form>
+                    <div class="input-group input-group-dynamic mb-8">
+                        <span class="input-group-text"><i class="fas fa-search" aria-hidden="true"></i></span>
+
+                        <input class="form-control" id="search" placeholder="Search" type="text" >
+
+                    </div>
+                </form>
+        {% endblock %}
+
+        <h1>Ticket List</h1>
+
+        <a href="{{ path("newTicketPage") }}" class="btn btn-sm btn-warning">
+            add a new ticket
+        </a>
+        <table class="table table-info">
+
+            <tr>
+                <th>Identifiant Ticket </th>
+                <th>id evenement </th>
+                <th> prix </th>
+            </tr>
+            {% for cmd in list %}
+             <tbody id="all">
+                <tr>
+                    <td>{{ cmd.idTicket }}</td>
+                    <td>{{ cmd.Event ? cmd.Event.idevent  }}</td>
+                    <td>{{ cmd.prix }}</td>
+                    <td>
+                        <a href="{{ path("deleteTicketPage",{'id_ticket':cmd.idTicket }) }}">
+                            <button class="btn btn-sm btn-outline-danger">delete</button>
+                        </a>
+                
+                        <a href="{{ path("UpdateTicketPage",{'id_ticket':cmd.idTicket}) }}">
+                            <button class="btn btn-sm btn-outline-primary">Update</button>
+                        </a>
+                    </td>
+
+                </tr>
+            {% endfor %}
+         </tbody>
+
+                    <tbody id="search"></tbody>
+                </table>
+
+
+        {{ knp_pagination_render(list) }}
+
+         </div>
+
+    </div>
+
+{% endblock %}
+
+

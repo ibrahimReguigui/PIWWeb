@@ -1,0 +1,124 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Hello Event Controller{% endblock %}
+
+{% block body %}
+
+        <div class="container">
+            {% block search %}
+                <form>
+                    <div class="input-group input-group-dynamic mb-8">
+                        <span class="input-group-text"><i class="fas fa-search" aria-hidden="true"></i></span>
+
+                        <input class="form-control" id="search" placeholder="Search" type="text" >
+
+                    </div>
+                </form>
+            {% endblock %}
+
+        <h1>Event List</h1>
+
+        <a href="{{ path("newEventPage") }}" class="btn btn-sm btn-warning">
+            add a new Event
+        </a>
+
+        <a href="http://localhost:3000/" class="btn btn-sm btn-warning">
+            Map
+        </a>
+        <a href="http://127.0.0.1:8005" class="btn btn-sm btn-warning">
+            Search by Date ranges
+        </a>
+        <br> <br>
+        <table id="t" class="table table-info">
+
+            <tr>
+                <th>Identifiant Evenement</th>
+                <th>Nom Evenement</th>
+                <th>Date début Evenement</th>
+                <th>Date fin Evenement</th>
+                <th>Nombre de Places</th>
+                <th>Location</th>
+                <th>Image</th>
+            </tr>
+            {% for cmd in list %}
+            <tbody id="all">
+            <tr>
+                <td>{{ cmd.idevent }}</td>
+                <td>{{ cmd.nomevent }}</td>
+                <td>{{ cmd.datedebut | date('Y-m-d') }}</td>
+                <td>{{cmd.datefin | date('Y-m-d') }}</td>
+                <td>{{ cmd.nbrplaces }}</td>
+                <td>{{ cmd.location }}</td>
+                <td>{{ cmd.img }}</td>
+                <td>
+                    <a href="{{ path("deleteEventPage",{'idEvent':cmd.idevent }) }}">
+                        <button class="btn btn-sm btn-outline-danger">delete</button>
+                    </a>
+                    &nbsp
+                    <a href="{{ path("UpdateEventPage",{'idEvent':cmd.idevent}) }}">
+                        <button class="btn btn-sm btn-outline-primary">Update</button>
+                    </a>
+                </td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+            <tbody id="search"></tbody>
+        </table>
+        {{ knp_pagination_render(list) }}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $( document ).ready(function() {
+                $("#search").keyup(function(e){
+                    /* La variable value va prendre la valeur insérer dans le champ de texte afin d’effectuer la recherche */
+                    var value = $(this).val();
+                    /* Ajax est lancé lors du remplissage du champ texte dont l’id est « search » pour faire la recherche */
+                    $.ajax({
+                        /* l’url est une chaine de caractères contenant l’adresse où la requête est envoyée */
+                        url : "{{ path('searchT') }}",
+                        /* La méthode utilisée pour transférer les données est GET */
+                        type : 'GET',
+                        /*Ici search value va prendre la chaine entrée par un utilisateur dans la zone de recherche et sera placée après l’url */
+                        data: {
+                            'searchValue' : value
+                        },
+                        /*Cette fonction permet de vider le contenu du tableau pour recevoir le nouveau contenu*/
+                        success : function(retour){
+                            if(retour){
+                                $('#t tbody#search').empty();
+                                $.each(JSON.parse(retour), function(i, obj) {
+
+                                    $('#t tbody#all').hide();
+
+
+                                    $('#t tbody#search').append("<tr>");
+                                    $('#t tbody#search').append(" <td>"+obj.idevent+"</td>");
+                                    $('#t tbody#search').append(" <td>"+obj.nomevent+"</td>");
+                                    $('#t tbody#search').append(" <td>"+obj.datedebut+"</td>");
+                                    $('#t tbody#search').append(" <td>"+obj.datefin+"</td>");
+                                    $('#t tbody#search').append(" <td>"+obj.nbrplaces+"</td>");
+                                    $('#t tbody#search').append(" <td>"+obj.location+"</td>");
+                                    var p="/uploads/"+obj.img;
+                                    var img = "<img src="+p+" width='100' height='100'/>";
+                                    $('#t tbody#search').append(" <td>"+img+"</td>");
+
+
+                                });
+                            }
+                            //$('#t tbody#search').append('<tr><td> '+obj.lieu+'  </td><td>    '+obj.nbPlace+'  </td><td>'+obj.descriptions+' </td><td>'+obj.dateEvent+' </td><td>'+obj.getcategory+' </td><td>'+obj.Description+'</td><td><td><a href="event/'+obj.idEvent+'/edit">Modifier</a></td></tr>');
+                            else
+                            {
+                                $('#t tbody#all').show();
+                                $('#t tbody#search').empty();
+                                $('#t tbody#search').fadeIn('fast');
+                            }
+                        },
+                    });
+                    return false;
+                });
+
+            });
+        </script>
+    </div>
+    {% endblock %}
+   

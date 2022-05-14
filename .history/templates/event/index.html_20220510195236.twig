@@ -1,0 +1,66 @@
+{% extends 'front/fresh-base.html.twig' %}
+
+{% block title %}Hello Event Controller{% endblock %}
+
+{% block body %}
+
+        <div class="container">
+            {% block search %}
+                <form>
+                    <div class="input-group input-group-dynamic mb-8">
+                        <span class="input-group-text"><i class="fas fa-search" aria-hidden="true"></i></span>
+
+                        <input class="form-control" id="search" placeholder="Search" type="text" >
+
+                    </div>
+                </form>
+            {% endblock %}
+                <h1>Event List</h1>
+               
+                <table id="t" class="table table-info">
+
+                    <tr>
+                        <th>Identifiant Evenement</th>
+                        <th> Nom Evenement</th>
+                        <th>Date début Evenement</th>
+                        <th>Date fin Evenement</th>
+                        <th>Nombre de Places</th>
+                        <th>Location</th>
+                        <th>Image</th>
+                    </tr>
+                    {% for cmd in list %}
+                        <tbody id="all">
+                        <tr>
+                            <td>{{ cmd.idevent }}</td>
+                            <td>{{ cmd.nomevent }}</td>
+                            <td>{{ cmd.datedebut | date('Y-m-d') }}</td>
+                            <td>{{cmd.datefin | date('Y-m-d') }}</td>
+                            <td>{{ cmd.nbrplaces }}</td>
+                            <td>{{ cmd.location }}</td>
+                            <td><img src="{{asset('uploads/') ~ cmd.img}}"  width="100" height="100" alt=""></td>
+
+                            <td>
+                                <a href="{{ path("deleteEventPage",{'idEvent':cmd.idevent }) }}">
+                                    <button class="btn btn-sm btn-outline-danger">delete</button>
+                                </a>
+                              
+                                <a href="{{ path("UpdateEventPage",{'idEvent':cmd.idevent}) }}">
+                                    <button class="btn btn-sm btn-outline-primary">Update</button>
+                                </a>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                        </tbody>
+
+                    <tbody id="search"></tbody>
+                </table>
+
+            {{ knp_pagination_render(list) }}
+             
+
+         </div>
+
+    </div>
+
+{% endblock %}
